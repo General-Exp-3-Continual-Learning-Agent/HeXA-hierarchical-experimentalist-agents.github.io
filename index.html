@@ -3,364 +3,200 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HeXA — Hierarchical Experimentalist Agents</title>
+  <title>HeXA: Hierarchical Experimentalist Agents</title>
   <meta name="description" content="HeXA: a training-free, in-context reinforcement learning framework that enables LLM agents to actively experiment, evolve reusable skills, and transfer them across tasks." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="HeXA — Hierarchical Experimentalist Agents" />
-  <meta property="og:description" content="Training-free, in-context RL for LLM agents that actively experiment, evolve skills, and transfer them across tasks." />
+  <meta property="og:title" content="HeXA: Hierarchical Experimentalist Agents" />
+  <meta property="og:description" content="A training-free, in-context RL framework for LLM agents that actively experiment, evolve skills, and transfer them across tasks." />
   <meta property="og:type" content="website" />
 
-  <!-- Fonts: a distinctive serif display + clean technical body -->
+  <!-- Google Fonts: Noto Sans / Noto Serif — the academic-template defaults -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Google+Sans:wght@500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- ============================================================ -->
-  <!-- HERO -->
+  <!-- TITLE / AUTHORS / LINKS                                       -->
   <!-- ============================================================ -->
-  <header class="hero">
-    <div class="hero__inner">
-      <div class="hero__eyebrow">
-        <span class="dot"></span>
-        <span>NeurIPS 2026 · Under Review</span>
-      </div>
+  <section class="hero">
+    <div class="container">
 
-      <h1 class="hero__title">
-        <span class="hero__title-line">Hierarchical</span>
-        <span class="hero__title-line">Experimentalist</span>
-        <span class="hero__title-line"><em>Agents</em></span>
-      </h1>
-
-      <p class="hero__subtitle">
-        A training-free, in-context reinforcement learning framework in which a frozen LLM
-        actively designs experiments, distills hierarchical skills from interaction experience,
-        and transfers them across tasks — <strong>no parameter updates, no offline data, no oracle guidance.</strong>
-      </p>
+      <h1 class="title">Hierarchical Experimentalist Agents</h1>
+      <h2 class="subtitle">In-context skill evolution for LLM agents that actively experiment</h2>
 
       <!-- Authors -->
       <div class="authors">
-        <!-- TODO: replace with your real author list & affiliations -->
-        <div class="author">
-          <span class="author__name">Anonymous Author<sup>1</sup></span>
-        </div>
-        <div class="author">
-          <span class="author__name">Anonymous Author<sup>2</sup></span>
-        </div>
-        <div class="author">
-          <span class="author__name">Anonymous Author<sup>1,2</sup></span>
-        </div>
+        <span class="author"><a href="#">Anonymous Author</a><sup>1</sup></span>
+        <span class="author"><a href="#">Anonymous Author</a><sup>2</sup></span>
+        <span class="author"><a href="#">Anonymous Author</a><sup>1,2</sup></span>
       </div>
 
       <div class="affiliations">
-        <span><sup>1</sup> Affiliation One</span>
-        <span><sup>2</sup> Affiliation Two</span>
+        <span><sup>1</sup>Affiliation One</span>
+        <span><sup>2</sup>Affiliation Two</span>
       </div>
 
-      <!-- Action buttons -->
-      <nav class="hero__cta" aria-label="Resources">
-        <a class="btn btn--primary" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm0 7V3.5L19.5 9H14Z"/></svg>
-          Paper
-        </a>
-        <a class="btn" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.27-1.68-1.27-1.68-1.04-.7.08-.69.08-.69 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.53-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.94 10.94 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.41.35.78 1.05.78 2.12v3.14c0 .3.21.66.79.55A11.5 11.5 0 0 0 12 .5z"/></svg>
-          Code
-        </a>
-        <a class="btn" href="#bibtex">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M7 4v16l5-3 5 3V4z"/></svg>
-          BibTeX
-        </a>
-      </nav>
-    </div>
+      <div class="venue">Under review at NeurIPS 2026</div>
 
-    <div class="hero__corner hero__corner--tl">HeXA</div>
-    <div class="hero__corner hero__corner--br">v1.0</div>
-  </header>
+      <!-- Buttons -->
+      <div class="links">
+        <a class="link-button" href="#" target="_blank" rel="noopener">
+          <span class="icon">📄</span><span>Paper</span>
+        </a>
+        <a class="link-button" href="#" target="_blank" rel="noopener">
+          <span class="icon">&lt;/&gt;</span><span>Code</span>
+        </a>
+        <a class="link-button" href="#bibtex">
+          <span class="icon">❝</span><span>BibTeX</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ============================================================ -->
-  <!-- TEASER -->
+  <!-- TEASER FIGURE                                                 -->
   <!-- ============================================================ -->
   <section class="teaser">
     <div class="container">
-      <!-- Replace with your teaser figure (e.g. assets/teaser.png) -->
-      <figure class="teaser__figure">
-        <div class="teaser__placeholder" role="img" aria-label="Teaser figure placeholder">
-          <svg viewBox="0 0 800 360" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
-              </pattern>
-            </defs>
-            <rect width="800" height="360" fill="var(--bg-soft)" />
-            <rect width="800" height="360" fill="url(#grid)" />
-
-            <!-- ReAct row (top) -->
-            <g transform="translate(60, 70)" font-family="JetBrains Mono, monospace" font-size="11" fill="var(--ink)">
-              <text x="0" y="-12">(a) ReAct — independent seeds</text>
-              <g>
-                <rect x="0"  y="0" width="60" height="28" fill="#fff" stroke="var(--ink)"/>
-                <rect x="68" y="0" width="60" height="28" fill="#fff" stroke="var(--ink)"/>
-                <rect x="136" y="0" width="60" height="28" fill="#fff" stroke="var(--ink)"/>
-                <text x="208" y="18" fill="#c33">✕</text>
-                <rect x="240" y="0" width="60" height="28" fill="#fff" stroke="var(--ink)"/>
-                <rect x="308" y="0" width="60" height="28" fill="#fff" stroke="var(--ink)"/>
-                <text x="380" y="18" fill="#c33">✕</text>
-              </g>
-            </g>
-
-            <!-- HeXA row (bottom) -->
-            <g transform="translate(60, 200)" font-family="JetBrains Mono, monospace" font-size="11" fill="var(--ink)">
-              <text x="0" y="-12">(b) HeXA — skills evolve across seeds</text>
-              <g>
-                <rect x="0"  y="0" width="60" height="28" fill="var(--accent-soft)" stroke="var(--accent)"/>
-                <rect x="68" y="0" width="60" height="28" fill="var(--accent-soft)" stroke="var(--accent)"/>
-                <rect x="136" y="0" width="60" height="28" fill="var(--accent-soft)" stroke="var(--accent)"/>
-                <text x="208" y="18" fill="#2a7">✓</text>
-                <rect x="240" y="0" width="60" height="28" fill="var(--accent-soft)" stroke="var(--accent)"/>
-                <text x="312" y="18" fill="#2a7">✓</text>
-                <rect x="340" y="0" width="60" height="28" fill="var(--accent-soft)" stroke="var(--accent)"/>
-                <text x="412" y="18" fill="#2a7">✓</text>
-              </g>
-              <!-- Skill bank arrow -->
-              <path d="M 200 -80 C 240 -50, 240 30, 200 50" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <text x="208" y="-30" fill="var(--accent)">↻ skill bank</text>
-            </g>
-
-            <text x="60" y="330" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="var(--ink-soft)">
-              Replace this placeholder with your teaser figure → assets/teaser.png
-            </text>
-          </svg>
+      <figure>
+        <!-- Replace with: <img src="assets/teaser.png" alt="HeXA overview" /> -->
+        <div class="placeholder-figure" aria-label="Teaser figure placeholder">
+          teaser figure here<br><span class="placeholder-sub">→ assets/teaser.png</span>
         </div>
         <figcaption>
-          <strong>Figure 1.</strong> Overview of the HeXA framework on InterPhyre. Each seed contributes
-          interaction evidence that the evolver distills into a reusable skill bank, which is then injected
-          into subsequent seeds — and into structurally novel target levels — without any further experimentation.
+          <strong>Figure 1.</strong> Overview of HeXA. Seeds are grouped into a meta-episode; after each seed, the
+          evolver distills the trajectory into a skill bank (physics principles + common mistakes), and the
+          evolved bank is injected into subsequent seeds' system prompts. Skill banks from easier source levels
+          can be synthesised into a cross-level bank for harder target levels with no target-level experimentation.
         </figcaption>
       </figure>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- ABSTRACT -->
+  <!-- ABSTRACT                                                      -->
   <!-- ============================================================ -->
-  <section class="section" id="abstract">
+  <section class="section">
     <div class="container container--narrow">
-      <h2 class="section__title">Abstract</h2>
-      <p class="prose">
+      <h2 class="section-title">Abstract</h2>
+      <p>
         Large language models (LLMs) are increasingly used to take action or augment human decision-making,
-        yet most approaches rely on the model's parametric knowledge, possibly supplemented with fixed data
-        or tools. This paradigm breaks down for novel domains or sophisticated queries that are not practically
-        answerable from general prior knowledge. Instead, <em>active experimentation</em> may be needed to
-        gather targeted, query-specific data in the domain.
+        yet most approaches rely on the model's parametric knowledge, possibly supplemented with fixed data or
+        tools. This paradigm breaks down for novel domains or sophisticated queries that are not practically
+        answerable from general prior knowledge. Instead, active experimentation may be needed to gather
+        targeted, query-specific data in the domain.
       </p>
-      <p class="prose">
-        We introduce <strong>Hierarchical Experimentalist Agents (HeXA)</strong>, a novel in-context, experiment-centric
-        reasoning approach that <strong>(1)</strong> iteratively designs and refines query-relevant experiments;
-        <strong>(2)</strong> incrementally learns a library of reusable, composable skills that accelerate
-        experimentation within and across tasks; and <strong>(3)</strong> integrates experimental data to
-        effectively take actions or answer queries. HeXA self-improves in-context while co-evolving skills
-        and strategies from interaction rewards and feedback — all without access to offline data, an optimal
-        oracle, or teacher guidance.
+      <p>
+        We introduce <strong>Hierarchical Experimentalist Agents (HeXA)</strong>, a novel in-context,
+        experiment-centric reasoning approach that (1) iteratively designs and refines query-relevant
+        experiments; (2) incrementally learns a library of reusable, composable skills that accelerate
+        experimentation within and across tasks; and (3) integrates experimental data to effectively take
+        actions or answer queries. HeXA self-improves in-context while co-evolving skills and strategies
+        using interaction rewards — all without access to offline data, an optimal oracle, or teacher guidance.
       </p>
-      <p class="prose">
-        On <strong>InterPhyre</strong>, our new 2D procedural physics benchmark, HeXA reaches <strong>64%</strong>
-        success on the hardest level with Claude Sonnet 4.6, compared to 8% for ReAct and 22% for Reflexion.
-        Skill banks learned on easier levels transfer to harder unseen levels with no further experimentation,
-        yielding up to <strong>+36 pp</strong> from transferred skills alone.
+      <p>
+        We also introduce <strong>InterPhyre</strong>, a 2D procedural physics simulation environment with a
+        tool-call and intervention API designed to make hypothesis generation and experimentation explicit and
+        measurable. Using Claude Sonnet 4.6, HeXA reaches 64% success on the hardest level in InterPhyre,
+        compared to 8% using a ReAct and 22% using a Reflexion prompting baseline. The agent also achieves 44%
+        success by not doing any active experimentation and using only skills that were learned and transferred
+        from easier levels.
       </p>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- KEY RESULTS -->
+  <!-- METHOD                                                        -->
   <!-- ============================================================ -->
-  <section class="section section--alt" id="results">
-    <div class="container">
-      <h2 class="section__title">Key Results</h2>
-
-      <div class="stats">
-        <div class="stat">
-          <div class="stat__num">64<span class="stat__unit">%</span></div>
-          <div class="stat__label">Success on <em>catapult</em> with HeXA</div>
-          <div class="stat__sub">vs. 8% ReAct · 22% Reflexion · 2% Direct</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num">+36<span class="stat__unit">pp</span></div>
-          <div class="stat__label">Zero-shot transfer to <em>catapult</em></div>
-          <div class="stat__sub">Skills from 3 easier levels, no target trajectories</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num">+54<span class="stat__unit">pp</span></div>
-          <div class="stat__label">Gain on GPT-OSS-120B</div>
-          <div class="stat__sub">0% → 54% on catapult with skill bank</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num">40<span class="stat__unit">%</span></div>
-          <div class="stat__label">Fewer iterations per episode</div>
-          <div class="stat__sub">22.9 → 13.7 iterations on average</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- METHOD -->
-  <!-- ============================================================ -->
-  <section class="section" id="method">
-    <div class="container">
-      <h2 class="section__title">The HeXA Framework</h2>
-
-      <div class="method">
-        <div class="method__pillars">
-          <article class="pillar">
-            <span class="pillar__num">01</span>
-            <h3>Active Experimentation</h3>
-            <p>An <em>actor</em> LLM interacts with a simulator through a tool-call interface, deliberately probing
-              the environment with state-inspection, partial rollouts, and full simulations to gather query-relevant evidence.</p>
-          </article>
-
-          <article class="pillar">
-            <span class="pillar__num">02</span>
-            <h3>Skill Distillation</h3>
-            <p>An <em>evolver</em> LLM reads batches of successful and failed trajectories, contrasts high- against
-              low-reward episodes, and distills them into compact natural-language skills and common-mistake records.</p>
-          </article>
-
-          <article class="pillar">
-            <span class="pillar__num">03</span>
-            <h3>Skill Evolution &amp; Transfer</h3>
-            <p>A reward-weighted retriever injects top-confidence skills into each new episode. Skills are merged,
-              revised, or pruned across rounds — and re-grounded onto structurally related target tasks with no target-level data.</p>
-          </article>
-        </div>
-
-        <div class="method__diagram">
-          <svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="HeXA actor-evolver loop diagram">
-            <defs>
-              <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                <path d="M0,0 L0,6 L9,3 z" fill="var(--ink)"/>
-              </marker>
-            </defs>
-
-            <!-- Actor -->
-            <g transform="translate(60, 80)">
-              <rect width="200" height="140" rx="6" fill="#fff" stroke="var(--ink)" stroke-width="1.5"/>
-              <text x="100" y="32" text-anchor="middle" font-family="Fraunces, serif" font-size="20" font-weight="600">Actor π<tspan font-size="14" baseline-shift="sub">act</tspan></text>
-              <text x="100" y="64" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="12" fill="var(--ink-soft)">Designs experiments</text>
-              <text x="100" y="84" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="12" fill="var(--ink-soft)">via tool calls</text>
-              <text x="100" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="var(--accent)">Thought → Action → Obs</text>
-            </g>
-
-            <!-- Trajectories -->
-            <g transform="translate(350, 110)">
-              <rect width="200" height="80" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
-              <text x="100" y="32" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="600">Trajectories</text>
-              <text x="100" y="56" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="var(--ink-soft)">✓ successes &nbsp; ✕ failures</text>
-            </g>
-
-            <!-- Evolver -->
-            <g transform="translate(640, 80)">
-              <rect width="200" height="140" rx="6" fill="#fff" stroke="var(--ink)" stroke-width="1.5"/>
-              <text x="100" y="32" text-anchor="middle" font-family="Fraunces, serif" font-size="20" font-weight="600">Evolver π<tspan font-size="14" baseline-shift="sub">ev</tspan></text>
-              <text x="100" y="64" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="12" fill="var(--ink-soft)">Distills skills &amp;</text>
-              <text x="100" y="84" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="12" fill="var(--ink-soft)">common mistakes</text>
-              <text x="100" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="var(--accent)">contrastive · reward-weighted</text>
-            </g>
-
-            <!-- Arrows -->
-            <line x1="260" y1="150" x2="345" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"/>
-            <line x1="555" y1="150" x2="635" y2="150" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-            <!-- Feedback loop: skill bank -->
-            <path d="M 740 220 C 740 280, 160 280, 160 220" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
-            <text x="450" y="278" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="var(--accent)">
-              Skill Bank 𝒦 — injected into next episode's context
-            </text>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- INTERPHYRE -->
-  <!-- ============================================================ -->
-  <section class="section section--alt" id="interphyre">
+  <section class="section">
     <div class="container container--narrow">
-      <h2 class="section__title">InterPhyre Benchmark</h2>
-      <p class="prose">
-        We release <strong>InterPhyre</strong>, an extensible 2D procedural physics environment designed to make
-        hypothesis generation, active experimentation, and reusable skill learning explicit and measurable.
-        It exposes a structured tool-call interface for scene inspection, partial simulation, contact logs,
-        and per-level geometric analysis, alongside an intervention API with snapshot/restore semantics for
-        paired counterfactual analysis.
+      <h2 class="section-title">Method</h2>
+      <p>
+        HeXA instantiates a two-agent architecture operating over a sequence of rounds. An <em>actor</em>
+        generates trajectories by interacting with the environment through a tool-call interface, while an
+        <em>evolver</em> reads batches of trajectories and distills them into a natural-language skill bank.
+        At the start of each new episode, a retriever injects the top-confidence skills and common mistakes
+        into the actor's context, so that each subsequent trajectory benefits from the accumulated experience
+        of all prior ones.
       </p>
-      <ul class="features">
-        <li><strong>25 levels</strong>, 10,000 oracle-certified seeds each — 250,000 pre-validated task instances.</li>
-        <li><strong>Programmatic interventions</strong> for paired counterfactual trajectories from a shared physical prefix.</li>
-        <li><strong>Independent physics axes</strong> — vary gravity, friction, restitution without changing scene topology.</li>
-        <li><strong>Gymnasium &amp; tool-call interfaces</strong> share one simulator backend.</li>
-      </ul>
+      <p>
+        Each trajectory is assigned a scalar reward reflecting both outcome and efficiency, providing the
+        evolver with a richer learning signal than binary success alone. The evolver performs a two-pass
+        distillation: first, contrastive skill extraction across the full batch; second, mistake and
+        partial-skill extraction focused on the failure subset. Skills are merged, revised, or pruned across
+        rounds, producing a form of meta-learning in which the agent learns not just strategies but how to
+        learn strategies from interactions.
+      </p>
+      <p>
+        Beyond within-task learning, HeXA supports cross-task skill transfer: given source banks from one or
+        more easier task families, the evolver identifies skills that encode structurally relevant principles,
+        re-grounds them in the target task, and calibrates confidence based on how directly the principle
+        transfers. This enables zero-shot transfer without target-task trajectories.
+      </p>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- BIBTEX -->
+  <!-- RESULTS                                                       -->
+  <!-- ============================================================ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="section-title">Results</h2>
+      <p>
+        On <em>catapult</em>, the hardest InterPhyre level, HeXA reaches <strong>64.0%</strong> success with
+        Claude Sonnet 4.6, compared to 2.0% for the no-tool Direct baseline, 8.0% for ReAct, and 22.0% for
+        Reflexion. HeXA also reduces average iterations per episode from 22.9 (ReAct) and 21.3 (Reflexion)
+        to 13.7 — a 40% reduction — indicating that the evolved skill bank makes each new episode genuinely
+        easier to solve.
+      </p>
+      <p>
+        Skill banks transfer zero-shot to unseen levels. Combining fully-evolved banks from three source
+        levels and synthesising a cross-level bank for <em>catapult</em> raises accuracy from 8.0% to
+        <strong>44.0%</strong> (+36 pp) with no target-level experimentation. The gains extend to
+        open-weight solvers: HeXA improves Qwen-2.5-7B on <em>down_to_earth</em> from 62% to 72%, and lifts
+        GPT-OSS-120B on <em>catapult</em> from 0% to 54%.
+      </p>
+      <p>
+        Against gradient-based GRPO fine-tuning of Qwen-2.5-3B at a matched 50-seed budget, HeXA outperforms
+        GRPO by 4–8 points, illustrating the sample efficiency of in-context skill evolution in low-data
+        regimes — though GRPO eventually catches up with sufficient training.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- BIBTEX                                                        -->
   <!-- ============================================================ -->
   <section class="section" id="bibtex">
     <div class="container container--narrow">
-      <h2 class="section__title">Citation</h2>
-      <p class="prose">If you find HeXA or InterPhyre useful in your research, please cite our work:</p>
-      <div class="bibtex">
-        <button class="bibtex__copy" type="button" aria-label="Copy BibTeX">Copy</button>
-        <pre><code id="bibtex-code">@inproceedings{anonymous2026hexa,
+      <h2 class="section-title">BibTeX</h2>
+      <pre><code>@inproceedings{anonymous2026hexa,
   title     = {Hierarchical Experimentalist Agents},
   author    = {Anonymous Author},
   booktitle = {Advances in Neural Information Processing Systems},
   year      = {2026},
   note      = {Under review}
 }</code></pre>
-      </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- FOOTER -->
+  <!-- FOOTER                                                        -->
   <!-- ============================================================ -->
   <footer class="footer">
     <div class="container container--narrow">
       <p>
-        Website template inspired by academic project pages.
-        Built with care · no trackers · GitHub Pages.
+        Website template adapted from the
+        <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies project page</a>.
       </p>
     </div>
   </footer>
 
-  <script>
-    // BibTeX copy-to-clipboard
-    const copyBtn = document.querySelector('.bibtex__copy');
-    const bibCode = document.getElementById('bibtex-code');
-    if (copyBtn && bibCode) {
-      copyBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(bibCode.innerText);
-          const original = copyBtn.textContent;
-          copyBtn.textContent = 'Copied ✓';
-          copyBtn.classList.add('is-copied');
-          setTimeout(() => {
-            copyBtn.textContent = original;
-            copyBtn.classList.remove('is-copied');
-          }, 1500);
-        } catch (e) {
-          copyBtn.textContent = 'Press Ctrl+C';
-        }
-      });
-    }
-  </script>
 </body>
 </html>
