@@ -1,8 +1,6 @@
 # HeXA Project Page
 
 Static site for the **Hierarchical Experimentalist Agents** paper.
-Designed in the standard academic project-page style (Nerfies-template aesthetic, like
-[sim2reason.github.io](https://sim2reason.github.io/) and [builderbench.github.io](https://rajghugare19.github.io/builderbench/)).
 
 No framework, no build step. Just HTML + CSS.
 
