@@ -14,7 +14,7 @@
 set -euo pipefail
 
 PROJECT_DIR="/project/pi_sniekum_umass_edu/vgandhi"
-VERL_TOOL_DIR="$PROJECT_DIR/verl-tool-Interphyre"
+VERL_TOOL_DIR="$PROJECT_DIR/HeXA-hierarchical-experimentalist-agents.github.io/training"
 CONDA_ENV="$PROJECT_DIR/conda/envs/VerlToolInterphyre"
 
 MODEL_PATH="/scratch4/workspace/svaidyanatha_umass_edu-phyre/hf_cache/hub/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28"

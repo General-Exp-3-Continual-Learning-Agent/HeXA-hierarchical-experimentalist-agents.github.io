@@ -33,7 +33,7 @@ set -euo pipefail
 
 # ─── Paths ───────────────────────────────────────────────────────────────────
 PROJECT_DIR="/project/pi_sniekum_umass_edu/vgandhi"
-VERL_TOOL_DIR="$PROJECT_DIR/verl-tool-Interphyre"
+VERL_TOOL_DIR="$PROJECT_DIR/HeXA-hierarchical-experimentalist-agents.github.io/training"
 CONDA_ENV="$PROJECT_DIR/conda/envs/VerlToolInterphyre"
 DATA_DIR="$VERL_TOOL_DIR/data/interphyre_dte_s1_50_skilled"
 
