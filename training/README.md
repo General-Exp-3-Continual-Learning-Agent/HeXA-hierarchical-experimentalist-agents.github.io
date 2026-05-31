@@ -1,7 +1,6 @@
 # Interphyre — RL Training Code
 
-This folder mirrors the Interphyre reinforcement-learning training stack from the
-`verl-tool-Interphyre` project. It contains the physics environment, the GRPO training
+This folder contains the physics environment, the GRPO training
 framework (`verl` / `verl_tool`), the evolving skill-bank pipeline (`SKILL-RL`), the
 training/eval launch scripts, and the preprocessed datasets needed to reproduce runs.
 
