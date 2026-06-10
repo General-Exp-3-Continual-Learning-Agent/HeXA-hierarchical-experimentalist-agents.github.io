@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HeXA: Hierarchical Experimentalist Agents</title>
-  <meta name="description" content="HeXA: a training-free, in-context reinforcement learning framework that enables LLM agents to actively experiment, evolve reusable skills, and transfer them across tasks." />
+  <meta name="description" content="HeXA: a training-free, in-context reinforcement learning framework that enables LLM agents to actively experiment, evolve reusable skills, and transfer them across tasks. Evaluated on the InterPhyre physics benchmark." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="HeXA: Hierarchical Experimentalist Agents" />
   <meta property="og:description" content="A training-free, in-context RL framework for LLM agents that actively experiment, evolve skills, and transfer them across tasks." />
   <meta property="og:type" content="website" />
+  <!-- PROVIDE: assets/og-card.png (1200×630 social preview) -->
+  <meta property="og:image" content="assets/og-card.png" />
 
   <!-- Google Fonts: Noto Sans / Noto Serif — the academic-template defaults -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,24 +23,44 @@
 <body>
 
   <!-- ============================================================ -->
+  <!-- STICKY NAV                                                   -->
+  <!-- ============================================================ -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="#top">HeXA</a>
+      <div class="nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#interphyre">InterPhyre</a>
+        <a href="#method">Method</a>
+        <a href="#claims">Claims</a>
+        <a href="#experiments">Experiments</a>
+        <a href="#transfer">Transfer</a>
+        <a href="#skills">Skill Bank</a>
+        <a href="#bibtex">BibTeX</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
   <!-- TITLE / AUTHORS / LINKS                                       -->
   <!-- ============================================================ -->
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="container">
 
       <h1 class="title">Hierarchical Experimentalist Agents</h1>
-      <h2 class="subtitle">In-context skill evolution for LLM agents that actively experiment</h2>
+      <h2 class="subtitle">In-context skill evolution for LLM agents that actively experiment &mdash; evaluated on the InterPhyre physics benchmark</h2>
 
       <!-- Authors -->
       <div class="authors">
-        <span class="author"><a href="#">Anonymous Author</a><sup>1</sup></span>
-        <span class="author"><a href="#">Anonymous Author</a><sup>2</sup></span>
-        <span class="author"><a href="#">Anonymous Author</a><sup>1,2</sup></span>
+        <span class="author"><a href="#">Abhranil Chandra</a><sup>1</sup></span>
+        <span class="author"><a href="#">Sankaran Vaidyanathan</a><sup>1</sup></span>
+        <span class="author"><a href="#">Utsav Dhanuka</a><sup>1</sup></span>
+        <span class="author"><a href="#">Varun Gandhi</a><sup>1</sup></span>
+        <span class="author"><a href="#">Scott Niekum</a><sup>1</sup></span>
       </div>
 
       <div class="affiliations">
-        <span><sup>1</sup>Affiliation One</span>
-        <span><sup>2</sup>Affiliation Two</span>
+        <span><sup>1</sup>University of Massachusetts Amherst</span>
       </div>
 
       <div class="venue">Under review at NeurIPS 2026</div>
@@ -49,7 +71,13 @@
           <span class="icon">📄</span><span>Paper</span>
         </a>
         <a class="link-button" href="#" target="_blank" rel="noopener">
+          <span class="icon">📑</span><span>arXiv</span>
+        </a>
+        <a class="link-button" href="#" target="_blank" rel="noopener">
           <span class="icon">&lt;/&gt;</span><span>Code</span>
+        </a>
+        <a class="link-button" href="#" target="_blank" rel="noopener">
+          <span class="icon">🧪</span><span>InterPhyre</span>
         </a>
         <a class="link-button" href="#bibtex">
           <span class="icon">❝</span><span>BibTeX</span>
@@ -65,32 +93,64 @@
   <section class="teaser">
     <div class="container">
       <figure>
-        <!-- Replace with: <img src="assets/teaser.png" alt="HeXA overview" /> -->
+        <!-- PROVIDE: assets/teaser.png  (export Figure 1 from the paper, 1600–2000px wide) -->
+        <!-- Then replace the div below with: <img src="assets/teaser.png" alt="HeXA framework overview" /> -->
         <div class="placeholder-figure" aria-label="Teaser figure placeholder">
-          teaser figure here<br><span class="placeholder-sub">→ assets/teaser.png</span>
+          teaser figure here<br><span class="placeholder-sub">→ assets/teaser.png  (paper Figure 1: ReAct vs. HeXA meta-episode vs. cross-level transfer)</span>
         </div>
         <figcaption>
-          <strong>Figure 1.</strong> Overview of HeXA. Seeds are grouped into a meta-episode; after each seed, the
-          evolver distills the trajectory into a skill bank (physics principles + common mistakes), and the
-          evolved bank is injected into subsequent seeds' system prompts. Skill banks from easier source levels
-          can be synthesised into a cross-level bank for harder target levels with no target-level experimentation.
+          <strong>Figure 1.</strong> Overview of HeXA on InterPhyre physics puzzles.
+          <em>(a) ReAct</em> solves each seed independently with no cross-seed learning.
+          <em>(b) HeXA</em> groups seeds into a meta-episode; after each seed an <em>evolver</em> distils the
+          trajectory into a <strong>skill bank</strong> (physics principles + common mistakes), and the evolved
+          bank is injected into subsequent seeds' system prompts (25 iterations over 50 seeds per source level).
+          <em>(c) Cross-level transfer:</em> banks from easier source levels (down_to_earth, two_body_problem,
+          pass_the_parcel) are synthesised into a single cross-level bank for a harder target level (catapult),
+          with <strong>no target-level trajectories required</strong>.
         </figcaption>
       </figure>
     </div>
   </section>
 
   <!-- ============================================================ -->
+  <!-- HEADLINE NUMBERS                                              -->
+  <!-- ============================================================ -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">8% → 67%</div>
+          <div class="stat-label">Catapult success (Claude Sonnet 4.6) vs. the ReAct baseline</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">+36 pp</div>
+          <div class="stat-label">Zero-shot cross-level transfer to catapult, no target-level experiments</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0% → 54%</div>
+          <div class="stat-label">GPT-OSS-120B on catapult &mdash; gains extend to open-weight models</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~37%</div>
+          <div class="stat-label">Fewer iterations per episode than ReAct / Reflexion</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- ABSTRACT                                                      -->
   <!-- ============================================================ -->
-  <section class="section">
+  <section class="section" id="abstract">
     <div class="container container--narrow">
       <h2 class="section-title">Abstract</h2>
       <p>
         Large language models (LLMs) are increasingly used to take action or augment human decision-making,
         yet most approaches rely on the model's parametric knowledge, possibly supplemented with fixed data or
         tools. This paradigm breaks down for novel domains or sophisticated queries that are not practically
-        answerable from general prior knowledge. Instead, active experimentation may be needed to gather
-        targeted, query-specific data in the domain.
+        answerable from general prior knowledge &mdash; the laws of physics alone do not let you predict the
+        long-horizon behaviour of a complex physical system. Instead, <strong>active experimentation</strong> may
+        be needed to gather targeted, query-specific data in the domain.
       </p>
       <p>
         We introduce <strong>Hierarchical Experimentalist Agents (HeXA)</strong>, a novel in-context,
@@ -98,15 +158,158 @@
         experiments; (2) incrementally learns a library of reusable, composable skills that accelerate
         experimentation within and across tasks; and (3) integrates experimental data to effectively take
         actions or answer queries. HeXA self-improves in-context while co-evolving skills and strategies
-        using interaction rewards — all without access to offline data, an optimal oracle, or teacher guidance.
+        using interaction rewards &mdash; all without access to offline data, an optimal oracle, or teacher guidance.
+        Because it is entirely in-context and training-free, HeXA works with any black-box frontier model.
       </p>
       <p>
         We also introduce <strong>InterPhyre</strong>, a 2D procedural physics simulation environment with a
         tool-call and intervention API designed to make hypothesis generation and experimentation explicit and
-        measurable. Using Claude Sonnet 4.6, HeXA reaches 64% success on the hardest level in InterPhyre,
-        compared to 8% using a ReAct and 22% using a Reflexion prompting baseline. The agent also achieves 44%
-        success by not doing any active experimentation and using only skills that were learned and transferred
-        from easier levels.
+        measurable. Using Claude Sonnet 4.6, HeXA reaches <strong>67% success</strong> on the hardest level in
+        InterPhyre, compared to 8% using a ReAct and 21% using a Reflexion prompting baseline. The agent also
+        achieves <strong>44% success with no active experimentation at all</strong>, using only skills that were
+        learned and transferred from easier levels &mdash; demonstrating reusability and generalization.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- INTERPHYRE ENVIRONMENT + LEVEL GALLERY                       -->
+  <!-- ============================================================ -->
+  <section class="section section--alt" id="interphyre">
+    <div class="container">
+      <h2 class="section-title">The InterPhyre Environment</h2>
+      <p class="lead container--narrow">
+        InterPhyre is a 2D procedural physics benchmark built so that solving a task <em>requires</em>
+        interaction, not recall. In every level the agent places a red ball at <code>(x, y, r)</code>; the
+        simulator then runs forward and checks a level-specific success predicate. The catch: outcomes depend on
+        contact chains, lever mechanics, and collision timing that <strong>cannot be read off a static scene
+        description</strong> &mdash; the agent must run experiments to discover them. The curriculum ships
+        <strong>25 levels &times; 10,000 pre-validated seeds = 250,000 certified task instances</strong>, plus a
+        snapshot/restore intervention API for paired counterfactual rollouts.
+      </p>
+
+      <!-- ---- LEVEL GALLERY ---- -->
+      <h3 class="subhead">Level gallery</h3>
+      <p class="note container--narrow">
+        PROVIDE: a looping <code>.gif</code> or muted autoplay <code>.mp4</code> of each level being solved
+        (≈4–8&nbsp;s, 480–640px wide). Drop them in <code>assets/levels/&lt;name&gt;.gif</code> and swap each
+        <code>.level-media</code> placeholder for an <code>&lt;img&gt;</code>/<code>&lt;video&gt;</code>.
+        Static initial-state PNGs (paper Figure 14) also work.
+      </p>
+
+      <div class="level-grid">
+        <!-- Tier 2 first — these are HeXA's primary testbed -->
+        <figure class="level-card level-card--hard">
+          <div class="level-media" aria-label="catapult animation placeholder">→ assets/levels/catapult.gif</div>
+          <figcaption>
+            <span class="level-name">catapult <span class="tier-tag tier-tag--hard">Tier 2 · hard</span></span>
+            <span class="level-desc">Impulse transfer: drop the ball on a pivoting arm to launch a green ball over a ceiling-blocker into a basket.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>8%</strong></span>
+          </figcaption>
+        </figure>
+
+        <figure class="level-card level-card--hard">
+          <div class="level-media" aria-label="pass_the_parcel animation placeholder">→ assets/levels/pass_the_parcel.gif</div>
+          <figcaption>
+            <span class="level-name">pass_the_parcel <span class="tier-tag tier-tag--hard">Tier 2 · hard</span></span>
+            <span class="level-desc">Discover a ramp-and-basket mechanism rather than a direct collision to route the ball home.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>24%</strong></span>
+          </figcaption>
+        </figure>
+
+        <figure class="level-card">
+          <div class="level-media" aria-label="down_to_earth animation placeholder">→ assets/levels/down_to_earth.gif</div>
+          <figcaption>
+            <span class="level-name">down_to_earth <span class="tier-tag">Tier 1</span></span>
+            <span class="level-desc">Gravity-driven drop past an obstruction.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>100%</strong></span>
+          </figcaption>
+        </figure>
+
+        <figure class="level-card">
+          <div class="level-media" aria-label="two_body_problem animation placeholder">→ assets/levels/two_body_problem.gif</div>
+          <figcaption>
+            <span class="level-name">two_body_problem <span class="tier-tag">Tier 1</span></span>
+            <span class="level-desc">Coordinate two interacting bodies via momentum transfer.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>100%</strong></span>
+          </figcaption>
+        </figure>
+
+        <figure class="level-card">
+          <div class="level-media" aria-label="falling_into_place animation placeholder">→ assets/levels/falling_into_place.gif</div>
+          <figcaption>
+            <span class="level-name">falling_into_place <span class="tier-tag">Tier 1</span></span>
+            <span class="level-desc">Timed interception: cross a platform edge to meet a falling jar.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>100%</strong></span>
+          </figcaption>
+        </figure>
+
+        <figure class="level-card">
+          <div class="level-media" aria-label="tipping_point animation placeholder">→ assets/levels/tipping_point.gif</div>
+          <figcaption>
+            <span class="level-name">tipping_point <span class="tier-tag">Tier 1</span></span>
+            <span class="level-desc">Unstable equilibrium &mdash; nudge a balanced structure the right way.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>96%</strong></span>
+          </figcaption>
+        </figure>
+
+        <figure class="level-card">
+          <div class="level-media" aria-label="basket_case animation placeholder">→ assets/levels/basket_case.gif</div>
+          <figcaption>
+            <span class="level-name">basket_case <span class="tier-tag">Tier 1</span></span>
+            <span class="level-desc">Container avoidance: deflect the green ball away from a basket.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>100%</strong></span>
+          </figcaption>
+        </figure>
+
+        <figure class="level-card">
+          <div class="level-media" aria-label="cliffhanger animation placeholder">→ assets/levels/cliffhanger.gif</div>
+          <figcaption>
+            <span class="level-name">cliffhanger <span class="tier-tag">Tier 1</span></span>
+            <span class="level-desc">Ledge/edge dynamics under gravity.</span>
+            <span class="level-base">Sonnet ReAct baseline: <strong>100%</strong></span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="note container--narrow">
+        Other named curriculum levels include <code>marble_race</code> (rolling dynamics along a track),
+        <code>seesaw</code> (lever balance), <code>the_cradle</code> (pendulum), and <code>keyhole</code>
+        (aperture navigation). PROVIDE media for any you want to feature.
+      </p>
+
+      <!-- ---- TOOL / INTERVENTION API ---- -->
+      <h3 class="subhead">The tool-call &amp; intervention API</h3>
+      <p class="container--narrow">
+        Each level exposes a structured tool surface the agent invokes directly, so that hypothesis testing is
+        explicit and measurable. The <em>catapult</em> level, for example, exposes four complementary tools:
+      </p>
+      <div class="api-block container--narrow">
+<pre><code><span class="api-fn">describe_scene_geometry()</span>
+    <span class="api-cm"># Strategy-neutral inventory: balls (pos, radius, dynamic),</span>
+    <span class="api-cm"># bars (centre, angle, length), baskets, key pairwise distances,</span>
+    <span class="api-cm"># and the success condition. A first-pass survey.</span>
+
+<span class="api-fn">predict_first_contact(x, y, radius)</span>
+    <span class="api-cm"># Cheap pre-check (≤90 steps): which object the red ball hits</span>
+    <span class="api-cm"># first, the contact step, approach speed, point, surface normal.</span>
+
+<span class="api-fn">trace_green_ball(x, y, radius)</span>
+    <span class="api-cm"># Lightweight probe: green ball's (x,y) waypoints every 30 steps</span>
+    <span class="api-cm"># plus start/end/peak summary. "Where does it go?"</span>
+
+<span class="api-fn">simulate_with_trace(x, y, radius, object_names, stop_step)</span>
+    <span class="api-cm"># Full rollout: per-object kinematic extrema (peak_y, v_max,</span>
+    <span class="api-cm"># Δpos, angular speed) + up to 15 contact events.</span>
+
+<span class="api-fn">finish(x, y, radius)</span>
+    <span class="api-cm"># Commit the final placement; environment scores the predicate.</span></code></pre>
+      </div>
+      <p class="note container--narrow">
+        Other levels add bespoke analysis tools &mdash; <code>compute_intercept_setup()</code> (falling_into_place),
+        <code>compute_basket_analysis()</code> (basket_case), <code>get_ramp_center()</code> (pass_the_parcel).
+        The same backend exposes a <strong>snapshot/restore</strong> primitive that branches a shared
+        mid-trajectory state into paired counterfactual rollouts (paper Figure 13).
       </p>
     </div>
   </section>
@@ -114,80 +317,367 @@
   <!-- ============================================================ -->
   <!-- METHOD                                                        -->
   <!-- ============================================================ -->
-  <section class="section">
+  <section class="section" id="method">
     <div class="container container--narrow">
-      <h2 class="section-title">Method</h2>
+      <h2 class="section-title">How HeXA Works</h2>
       <p>
-        HeXA instantiates a two-agent architecture operating over a sequence of rounds. An <em>actor</em>
-        generates trajectories by interacting with the environment through a tool-call interface, while an
-        <em>evolver</em> reads batches of trajectories and distills them into a natural-language skill bank.
-        At the start of each new episode, a retriever injects the top-confidence skills and common mistakes
-        into the actor's context, so that each subsequent trajectory benefits from the accumulated experience
-        of all prior ones.
+        HeXA instantiates a two-agent architecture operating over a sequence of rounds. An <strong>actor</strong>
+        generates trajectories by interacting with the environment through the tool-call interface; an
+        <strong>evolver</strong> reads batches of trajectories and distils them into a natural-language
+        <strong>skill bank</strong>; and a <strong>retriever</strong> injects the top-weighted skills and common
+        mistakes into the actor's context at the start of each new episode. Each subsequent trajectory benefits
+        from the accumulated experience of all prior ones &mdash; in-context reinforcement learning, where the
+        policy improves through context augmentation rather than weight updates.
       </p>
+
+      <figure class="inline-fig">
+        <!-- PROVIDE: assets/loop.png (paper Figure 2 / Figure 7 — the actor–evolver–retriever loop) -->
+        <div class="placeholder-figure placeholder-figure--short" aria-label="actor-evolver-retriever loop placeholder">
+          actor → evolver → retriever loop<br><span class="placeholder-sub">→ assets/loop.png  (paper Figure 2)</span>
+        </div>
+        <figcaption>
+          <strong>Figure 2.</strong> The actor&ndash;evolver&ndash;retriever loop (one round). The actor runs each
+          episode with the retrieved skill context prepended; trajectories are tagged with rewards. The evolver
+          curates the skill bank (capped at <em>M</em><sub>max</sub> skills, <em>N</em><sub>max</sub> mistakes per
+          task family); the retriever re-injects the top entries by weight for the next round.
+        </figcaption>
+      </figure>
+
+      <h3 class="subhead">Reward-guided, two-pass distillation</h3>
       <p>
-        Each trajectory is assigned a scalar reward reflecting both outcome and efficiency, providing the
-        evolver with a richer learning signal than binary success alone. The evolver performs a two-pass
-        distillation: first, contrastive skill extraction across the full batch; second, mistake and
-        partial-skill extraction focused on the failure subset. Skills are merged, revised, or pruned across
-        rounds, producing a form of meta-learning in which the agent learns not just strategies but how to
-        learn strategies from interactions.
+        Each trajectory gets a scalar reward <em>r</em>(&tau;)&nbsp;&isin;&nbsp;[&minus;1,&nbsp;+1] reflecting both
+        outcome and efficiency &mdash; fast successes yield high-confidence strategies, while extensively-explored
+        failures provide evidence for diagnosing mistakes. The evolver runs a two-pass distillation: first,
+        <strong>contrastive skill extraction</strong> across the full batch (what distinguishes high-reward from
+        low-reward trajectories); second, <strong>mistake and partial-skill extraction</strong> focused on the
+        failure subset. Each skill carries a weight <em>w</em><sub>k</sub> derived from the mean reward of its
+        source trajectories.
       </p>
+
+      <h3 class="subhead">Hierarchical, evolving skills</h3>
       <p>
-        Beyond within-task learning, HeXA supports cross-task skill transfer: given source banks from one or
-        more easier task families, the evolver identifies skills that encode structurally relevant principles,
-        re-grounds them in the target task, and calibrates confidence based on how directly the principle
-        transfers. This enables zero-shot transfer without target-task trajectories.
+        Skills are hierarchical in two senses. First, they abstract many low-level tool calls into one high-level
+        principle (e.g. <em>"when the ceiling&ndash;range tradeoff is unsolvable by radius tuning, shift x to
+        0.1&ndash;0.3"</em> compresses dozens of <code>(x, y, r)</code> sequences). Second, skills are learned
+        while the agent already has access to earlier ones, so later skills build on earlier ones. The default
+        <strong>Off2On Evolving</strong> regime merges, revises, or prunes skills with each round's evidence; it
+        beats Iterative Replacement, frozen Offline banks, and Pure Online across every model and level tested.
+      </p>
+
+      <h3 class="subhead">Cross-task transfer</h3>
+      <p>
+        Given source banks and a textual description of a target task, the evolver identifies structurally
+        relevant skills, re-grounds them in the target task, and recalibrates their weights by how directly the
+        principle transfers &mdash; enabling zero-shot transfer with no target-task trajectories. A transferred
+        bank can also seed subsequent within-task refinement.
       </p>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- RESULTS                                                       -->
+  <!-- EPISODE WALKTHROUGH (ReAct vs HeXA)                          -->
   <!-- ============================================================ -->
-  <section class="section">
-    <div class="container container--narrow">
-      <h2 class="section-title">Results</h2>
-      <p>
-        On <em>catapult</em>, the hardest InterPhyre level, HeXA reaches <strong>64.0%</strong> success with
-        Claude Sonnet 4.6, compared to 2.0% for the no-tool Direct baseline, 8.0% for ReAct, and 22.0% for
-        Reflexion. HeXA also reduces average iterations per episode from 22.9 (ReAct) and 21.3 (Reflexion)
-        to 13.7 — a 40% reduction — indicating that the evolved skill bank makes each new episode genuinely
-        easier to solve.
+  <section class="section section--alt" id="walkthrough">
+    <div class="container">
+      <h2 class="section-title">One Episode, Two Agents</h2>
+      <p class="lead container--narrow">
+        Catapult, seed 45. <strong>ReAct</strong> (no memory) exhausts its 25-iteration budget re-searching
+        placements and never finds a working launch. <strong>HeXA</strong> reuses skills distilled from earlier
+        catapult episodes &mdash; it already knows how to launch (drop a heavy ball on the arm) and how to fix the
+        usual failure (when the shot arcs too high and hits the ceiling, shift the drop point sideways to flatten
+        it). After one ceiling overshoot it applies the learned correction and solves the level.
       </p>
-      <p>
-        Skill banks transfer zero-shot to unseen levels. Combining fully-evolved banks from three source
-        levels and synthesising a cross-level bank for <em>catapult</em> raises accuracy from 8.0% to
-        <strong>44.0%</strong> (+36 pp) with no target-level experimentation. The gains extend to
-        open-weight solvers: HeXA improves Qwen-2.5-7B on <em>down_to_earth</em> from 62% to 72%, and lifts
-        GPT-OSS-120B on <em>catapult</em> from 0% to 54%.
-      </p>
-      <p>
-        Against gradient-based GRPO fine-tuning of Qwen-2.5-3B at a matched 50-seed budget, HeXA outperforms
-        GRPO by 4–8 points, illustrating the sample efficiency of in-context skill evolution in low-data
-        regimes — though GRPO eventually catches up with sufficient training.
-      </p>
+
+      <div class="trace-compare">
+        <figure class="trace-row trace-row--fail">
+          <figcaption class="trace-label">ReAct &mdash; 25 iterations, <span class="badge badge--fail">FAILURE</span> &nbsp; placement (0.5, &minus;1.0, 2.0)</figcaption>
+          <!-- PROVIDE: assets/trace_react.gif  (or a strip of frames: paper Figure 3 top row) -->
+          <div class="trace-media" aria-label="ReAct trajectory frames placeholder">→ assets/trace_react.gif  (paper Fig. 3, top row: steps 0 → 193, no green–blue contact)</div>
+        </figure>
+        <figure class="trace-row trace-row--win">
+          <figcaption class="trace-label">HeXA &mdash; 6 iterations, <span class="badge badge--win">SUCCESS</span> &nbsp; placement (0.3, 0.9, 1.5)</figcaption>
+          <!-- PROVIDE: assets/trace_hexa.gif  (paper Figure 3 bottom row) -->
+          <div class="trace-media" aria-label="HeXA trajectory frames placeholder">→ assets/trace_hexa.gif  (paper Fig. 3, bottom row: lever flings green ball over the blocker into the basket)</div>
+        </figure>
+      </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- BIBTEX                                                        -->
+  <!-- CORE CLAIMS                                                  -->
+  <!-- ============================================================ -->
+  <section class="section" id="claims">
+    <div class="container">
+      <h2 class="section-title">Core Claims</h2>
+      <div class="claim-grid">
+        <a class="claim-card" href="#exp-h1">
+          <div class="claim-h">H1 · In-context skill evolution beats prompting baselines</div>
+          <p>On the hardest levels, turning interaction traces into an evolving skill bank far outperforms ReAct, Reflexion, and a no-tool baseline &mdash; while using fewer iterations per episode.</p>
+          <div class="claim-stat">Catapult: 8% → 67%</div>
+        </a>
+        <a class="claim-card" href="#exp-h1">
+          <div class="claim-h">Reward calibration is load-bearing</div>
+          <p>Removing reward weighting from the evolver collapses much of the gain, showing the improvement comes from <em>scoring</em> and reusing skills, not merely interacting more.</p>
+          <div class="claim-stat">Catapult: 67% → 51% w/o reward</div>
+        </a>
+        <a class="claim-card" href="#exp-h2">
+          <div class="claim-h">H2 · Gains extend to open-weight models</div>
+          <p>The same mechanism lifts smaller open models, not just a strong frontier prior &mdash; the skill bank is a general in-context adaptation mechanism.</p>
+          <div class="claim-stat">GPT-OSS-120B catapult: 0% → 54%</div>
+        </a>
+        <a class="claim-card" href="#transfer">
+          <div class="claim-h">H3 · Skills transfer zero-shot across levels</div>
+          <p>Banks synthesised from easier source levels solve an unseen harder level with <strong>no target-level experimentation</strong>, evidence the evolver extracts abstract physics primitives.</p>
+          <div class="claim-stat">Catapult transfer: +36 pp</div>
+        </a>
+        <a class="claim-card" href="#exp-grpo">
+          <div class="claim-h">H4 · More sample-efficient than gradient RL</div>
+          <p>At a matched 50-seed budget, in-context HeXA beats GRPO fine-tuning, because a discovered strategy is usable by the next episode immediately via context.</p>
+          <div class="claim-stat">DTE: 24% (HeXA) vs 20% (GRPO)</div>
+        </a>
+        <a class="claim-card" href="#interphyre">
+          <div class="claim-h">InterPhyre · A benchmark for experimentation</div>
+          <p>A 2D physics domain whose tasks can't be read off a static description, with a controllable difficulty range and a programmatic intervention API.</p>
+          <div class="claim-stat">25 levels · 250k instances</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- EXPERIMENTS & RESULTS                                        -->
+  <!-- ============================================================ -->
+  <section class="section section--alt" id="experiments">
+    <div class="container">
+      <h2 class="section-title">Experiments &amp; Results</h2>
+      <p class="lead container--narrow">
+        All methods are evaluated on the <strong>same 50 seeds</strong> per level (paired comparisons), under an
+        identical 25-iteration harness, with HeXA in its default Off2On Evolving configuration (x=3 seeds/round).
+        HeXA, HeXA (no reward), and Reflexion report mean&nbsp;&plusmn;&nbsp;std over 3 runs.
+      </p>
+
+      <!-- ---- H1: main table ---- -->
+      <div id="exp-h1">
+        <h3 class="subhead">H1 &mdash; Skill accumulation on <code>catapult</code> (Claude Sonnet 4.6, 50 seeds)</h3>
+        <div class="table-wrap container--narrow">
+          <table class="results-table">
+            <thead>
+              <tr><th>Method</th><th>Acc. (%)</th><th>Succ.</th><th>Fail</th><th>Avg Iter</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Direct (one-shot, no tools)</td><td>2.0</td><td>1</td><td>49</td><td>1.0</td></tr>
+              <tr><td>ReAct baseline</td><td>8.0</td><td>4</td><td>46</td><td>22.9</td></tr>
+              <tr><td>Reflexion (K=2, 3 runs)</td><td>21.3 &plusmn; 2.5</td><td>10.7</td><td>39.3</td><td>21.2</td></tr>
+              <tr><td>HeXA (no reward, 3 runs)</td><td>50.7 &plusmn; 9.4</td><td>25.3</td><td>24.7</td><td>16.5</td></tr>
+              <tr class="row-highlight"><td>HeXA (Off2On Evol., 3 runs)</td><td><strong>67.3 &plusmn; 9.3</strong></td><td>33.7</td><td>16.3</td><td><strong>14.4</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note container--narrow">
+          HeXA reaches ~3&times; the strongest baseline (Reflexion) and uses the fewest iterations per solve.
+          On <code>pass_the_parcel</code>, the best HeXA config reaches <strong>60%</strong> vs. 24% (ReAct),
+          16% (Reflexion), 0% (Direct).
+        </p>
+
+        <div class="chart-2col">
+          <figure class="chart-fig">
+            <!-- PROVIDE: assets/charts/catapult_cumulative.png (paper Figure 4) -->
+            <div class="placeholder-figure placeholder-figure--chart" aria-label="catapult cumulative success chart placeholder">
+              cumulative success curve<br><span class="placeholder-sub">→ assets/charts/catapult_cumulative.png  (paper Fig. 4)</span>
+            </div>
+            <figcaption><strong>Figure 4.</strong> Cumulative success on catapult (mean of 3 runs, &plusmn;1 std). HeXA 67.3% · HeXA no-reward 50.7% · Reflexion 21.3%.</figcaption>
+          </figure>
+          <figure class="chart-fig">
+            <!-- PROVIDE: assets/charts/ptp_cumulative.png (paper Figure 5) -->
+            <div class="placeholder-figure placeholder-figure--chart" aria-label="pass the parcel chart placeholder">
+              pass_the_parcel variants<br><span class="placeholder-sub">→ assets/charts/ptp_cumulative.png  (paper Fig. 5)</span>
+            </div>
+            <figcaption><strong>Figure 5.</strong> Pass the Parcel: Off2On Evolving finishes at 60% (+36 pp over ReAct) and converges to the lowest cost per seed.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- ---- Reward ablation ---- -->
+      <h3 class="subhead">Ablation &mdash; reward signal (Qwen-2.5-7B, 50 seeds)</h3>
+      <div class="table-wrap container--narrow">
+        <table class="results-table">
+          <thead>
+            <tr><th>Level</th><th>Method</th><th>Acc. (%)</th><th>Avg Iters</th><th>&Delta;</th></tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="3">Down to Earth</td><td>ReAct baseline</td><td>62.0</td><td>12.5</td><td>&mdash;</td></tr>
+            <tr><td>HeXA (no reward)</td><td>64.0</td><td>14.8</td><td>+2.0</td></tr>
+            <tr class="row-highlight"><td>HeXA (reward-weighted)</td><td><strong>72.0</strong></td><td>12.6</td><td>+10.0</td></tr>
+            <tr><td rowspan="3">Two Body Problem</td><td>ReAct baseline</td><td>18.0</td><td>22.2</td><td>&mdash;</td></tr>
+            <tr><td>HeXA (no reward)</td><td>26.0</td><td>22.2</td><td>+8.0</td></tr>
+            <tr class="row-highlight"><td>HeXA (reward-weighted)</td><td><strong>34.0</strong></td><td>18.9</td><td>+16.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ---- H2: open weight ---- -->
+      <div id="exp-h2">
+        <h3 class="subhead">H2 &mdash; Gains extend to open-weight solvers (50 seeds)</h3>
+        <div class="table-wrap container--narrow">
+          <table class="results-table">
+            <thead>
+              <tr><th>Level</th><th>Model</th><th>Baseline</th><th>HeXA</th><th>&Delta;</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Down to Earth</td><td>Qwen-2.5-3B</td><td>8.0</td><td>24.0</td><td>+16.0</td></tr>
+              <tr><td>Down to Earth</td><td>Qwen-2.5-7B</td><td>62.0</td><td>72.0</td><td>+10.0</td></tr>
+              <tr><td>Two Body Problem</td><td>Qwen-2.5-3B</td><td>6.0</td><td>14.0</td><td>+8.0</td></tr>
+              <tr><td>Two Body Problem</td><td>Qwen-2.5-7B</td><td>18.0</td><td>34.0</td><td>+16.0</td></tr>
+              <tr class="row-highlight"><td>Catapult</td><td>GPT-OSS-120B</td><td>0.0</td><td><strong>54.0</strong></td><td>+54.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="chart-fig container--narrow">
+          <!-- PROVIDE: assets/charts/open_weight.png (paper Figure 10) -->
+          <div class="placeholder-figure placeholder-figure--chart" aria-label="open weight bar chart placeholder">
+            open-weight bar charts<br><span class="placeholder-sub">→ assets/charts/open_weight.png  (paper Fig. 10)</span>
+          </div>
+          <figcaption><strong>Figure 10.</strong> Consistent improvement across small open LLMs on DTE, TBP, and catapult.</figcaption>
+        </figure>
+      </div>
+
+      <!-- ---- H4: GRPO ---- -->
+      <div id="exp-grpo">
+        <h3 class="subhead">H4 &mdash; In-context HeXA vs. gradient-based GRPO (Qwen-2.5-3B)</h3>
+        <p class="container--narrow">
+          At a matched budget of 50 unique seeds, HeXA beats GRPO fine-tuning: <strong>24% vs 20%</strong> on
+          down_to_earth and <strong>14% vs 6%</strong> on two_body_problem. A strategy HeXA discovers is usable by
+          the next episode immediately via context, whereas GRPO must encode it into weights over many rollouts.
+          With sufficient training, GRPO eventually catches up via direct reward optimisation.
+        </p>
+        <figure class="chart-fig container--narrow">
+          <!-- PROVIDE: assets/charts/grpo.png (paper Figure 11) -->
+          <div class="placeholder-figure placeholder-figure--chart" aria-label="GRPO vs HeXA chart placeholder">
+            GRPO training dynamics vs HeXA<br><span class="placeholder-sub">→ assets/charts/grpo.png  (paper Fig. 11)</span>
+          </div>
+          <figcaption><strong>Figure 11.</strong> Val success vs. unique training seeds (log scale). At the matched budget (dashed line), both GRPO variants fall below HeXA (★).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CROSS-LEVEL TRANSFER                                         -->
+  <!-- ============================================================ -->
+  <section class="section" id="transfer">
+    <div class="container">
+      <h2 class="section-title">Zero-Shot Cross-Level Transfer</h2>
+      <p class="lead container--narrow">
+        Are the distilled skills genuine physics primitives or level-specific recipes? We synthesise a skill bank
+        for an unseen target level from <em>only</em> source-level banks plus a textual description &mdash;
+        <strong>no target-level trajectories at any stage</strong> &mdash; then inject it with no further evolution.
+      </p>
+      <div class="table-wrap container--narrow">
+        <table class="results-table">
+          <thead>
+            <tr><th>Target</th><th>Source banks</th><th>Solver</th><th>Acc. (%)</th><th>Baseline</th><th>&Delta;</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-highlight"><td>Catapult</td><td>DTE, TBP, PTP</td><td>Sonnet</td><td><strong>44.0</strong></td><td>8.0</td><td>+36.0</td></tr>
+            <tr><td>Falling Into Place</td><td>DTE</td><td>Qwen-7B</td><td>32.0</td><td>20.0</td><td>+12.0</td></tr>
+            <tr><td>Two Body Problem</td><td>DTE</td><td>Qwen-7B</td><td>34.0</td><td>18.0</td><td>+16.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note container--narrow">
+        The +36 pp catapult gain closes ~60% of the gap to the within-level HeXA result (64%), with zero
+        target-level experiments. That transfer also succeeds across <em>dissimilar</em> level pairs suggests the
+        evolver extracts abstract principles &mdash; momentum transfer, contact geometry, directional impulse &mdash;
+        rather than narrow placement heuristics.
+      </p>
+      <figure class="inline-fig">
+        <!-- PROVIDE: assets/transfer.png  (a diagram of source banks → synthesised target bank, paper Figure 1c) -->
+        <div class="placeholder-figure placeholder-figure--short" aria-label="transfer diagram placeholder">
+          source banks → synthesised cross-level bank → catapult<br><span class="placeholder-sub">→ assets/transfer.png  (paper Fig. 1c)</span>
+        </div>
+        <figcaption><strong>Figure 6.</strong> Three source banks are synthesised by the evolver into one cross-level bank for catapult.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SKILL BANK VIEWER                                            -->
+  <!-- ============================================================ -->
+  <section class="section section--alt" id="skills">
+    <div class="container">
+      <h2 class="section-title">Inside the Skill Bank</h2>
+      <p class="lead container--narrow">
+        The skill bank is HeXA's central artifact: a compact, human-readable set of <strong>physics principles</strong>
+        and <strong>common mistakes</strong>, each weighted by the reward of the trajectories it was distilled from.
+        Below are real entries from a round-14 <code>catapult</code> bank (paper Appendix E.4).
+      </p>
+
+      <div class="container--narrow">
+        <div class="skill-col-label skill-col-label--skill">Skills (physics principles)</div>
+
+        <details class="skill" open>
+          <summary>
+            <span class="skill-id">cat_ev_1_001</span>
+            <span class="skill-title">x ≈ 0.5 is the primary catapult launch sweet spot</span>
+            <span class="skill-weight">w = 0.9</span>
+          </summary>
+          <div class="skill-body">
+            <p><strong>Principle.</strong> Placing the red ball at x=0.5 on the catapult arm produces a consistent rightward launch arc; only deviate to x=0.3 when a ceiling hit is observed.</p>
+            <p><strong>Applicability.</strong> Always, as the first placement attempt.</p>
+            <p><strong>Coordinate example.</strong> <code>(0.5, 0.4, 1.5)</code></p>
+          </div>
+        </details>
+
+        <details class="skill">
+          <summary>
+            <span class="skill-id">cat_ev_11_009</span>
+            <span class="skill-title">When the ceiling–range tradeoff is unsolvable by radius tuning, shift x to 0.1–0.3</span>
+            <span class="skill-weight">w = 0.8</span>
+          </summary>
+          <div class="skill-body">
+            <p><strong>Principle.</strong> If adjusting the ball radius cannot simultaneously clear the ceiling-blocker and reach the basket, move the drop point sideways (x → 0.1–0.3) to flatten the launch arc instead of adding force.</p>
+            <p><strong>Note.</strong> This single principle compresses many distinct <code>(x, y, r)</code> tool-call sequences &mdash; an example of hierarchical abstraction.</p>
+          </div>
+        </details>
+
+        <div class="skill-col-label skill-col-label--mistake">Common mistakes</div>
+
+        <details class="skill skill--mistake">
+          <summary>
+            <span class="skill-id">µ</span>
+            <span class="skill-title">Fixating on a single launch mechanism and micro-tuning around one narrow region</span>
+          </summary>
+          <div class="skill-body">
+            <p><strong>Description.</strong> The agent micro-tunes x/y/r around the same narrow region instead of exploring alternatives.</p>
+            <p><strong>Root cause.</strong> The arm is the most obvious mechanism, so failures are met with small perturbations.</p>
+            <p><strong>Corrective.</strong> After 2 failures within x ± 0.2, move to a completely different x zone.</p>
+          </div>
+        </details>
+
+        <p class="note">
+          PROVIDE: more skill/mistake entries from your evolved banks (any level) to populate this section.
+          Each entry is one <code>&lt;details class="skill"&gt;</code> block &mdash; copy the pattern above.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- BIBTEX                                                       -->
   <!-- ============================================================ -->
   <section class="section" id="bibtex">
     <div class="container container--narrow">
       <h2 class="section-title">BibTeX</h2>
-      <pre><code>@inproceedings{anonymous2026hexa,
-  title     = {Hierarchical Experimentalist Agents},
-  author    = {Anonymous Author},
-  booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2026},
-  note      = {Under review}
+      <pre><code>@article{hexa2026,
+  title  = {HeXA: Hierarchical Experimentalist Agents},
+  author = {Abhranil Chandra and Sankaran Vaidyanathan and Utsav Dhanuka and Varun Gandhi and Scott Niekum},
+  year   = {2026}
 }</code></pre>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- FOOTER                                                        -->
+  <!-- FOOTER                                                       -->
   <!-- ============================================================ -->
   <footer class="footer">
     <div class="container container--narrow">
