@@ -550,7 +550,7 @@ code {
   background: var(--bg-code);
   border: 1px dashed var(--rule);
 }
-.trace-row img, .trace-row video { display: block; width: 100%; border-radius: 6px; }
+.trace-row img, .trace-row video { display: block; width: 100%; max-width: 640px; margin: 0 auto; border-radius: 6px; }
 .trace-row--fail .trace-media { border-color: #e0b4b4; }
 .trace-row--win .trace-media { border-color: #a7d3a7; }
 .badge {
