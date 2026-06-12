@@ -186,17 +186,11 @@
 
       <!-- ---- LEVEL GALLERY ---- -->
       <h3 class="subhead">Level gallery</h3>
-      <p class="note container--narrow">
-        PROVIDE: a looping <code>.gif</code> or muted autoplay <code>.mp4</code> of each level being solved
-        (≈4–8&nbsp;s, 480–640px wide). Drop them in <code>assets/levels/&lt;name&gt;.gif</code> and swap each
-        <code>.level-media</code> placeholder for an <code>&lt;img&gt;</code>/<code>&lt;video&gt;</code>.
-        Static initial-state PNGs (paper Figure 14) also work.
-      </p>
 
       <div class="level-grid">
         <!-- Tier 2 first — these are HeXA's primary testbed -->
         <figure class="level-card level-card--hard">
-          <div class="level-media" aria-label="catapult animation placeholder">→ assets/levels/catapult.gif</div>
+          <img src="assets/catapult_25_action.gif" alt="catapult level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">catapult <span class="tier-tag tier-tag--hard">Tier 2 · hard</span></span>
             <span class="level-desc">Impulse transfer: drop the ball on a pivoting arm to launch a green ball over a ceiling-blocker into a basket.</span>
@@ -205,7 +199,7 @@
         </figure>
 
         <figure class="level-card level-card--hard">
-          <div class="level-media" aria-label="pass_the_parcel animation placeholder">→ assets/levels/pass_the_parcel.gif</div>
+          <img src="assets/pass_the_parcel_44_action.gif" alt="pass_the_parcel level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">pass_the_parcel <span class="tier-tag tier-tag--hard">Tier 2 · hard</span></span>
             <span class="level-desc">Discover a ramp-and-basket mechanism rather than a direct collision to route the ball home.</span>
@@ -214,7 +208,7 @@
         </figure>
 
         <figure class="level-card">
-          <div class="level-media" aria-label="down_to_earth animation placeholder">→ assets/levels/down_to_earth.gif</div>
+          <img src="assets/down_to_earth_47_action.gif" alt="down_to_earth level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">down_to_earth <span class="tier-tag">Tier 1</span></span>
             <span class="level-desc">Gravity-driven drop past an obstruction.</span>
@@ -223,7 +217,7 @@
         </figure>
 
         <figure class="level-card">
-          <div class="level-media" aria-label="two_body_problem animation placeholder">→ assets/levels/two_body_problem.gif</div>
+          <img src="assets/two_body_problem_42_solution.gif" alt="two_body_problem level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">two_body_problem <span class="tier-tag">Tier 1</span></span>
             <span class="level-desc">Coordinate two interacting bodies via momentum transfer.</span>
@@ -232,7 +226,7 @@
         </figure>
 
         <figure class="level-card">
-          <div class="level-media" aria-label="falling_into_place animation placeholder">→ assets/levels/falling_into_place.gif</div>
+          <img src="assets/falling_into_place_30_solution.gif" alt="falling_into_place level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">falling_into_place <span class="tier-tag">Tier 1</span></span>
             <span class="level-desc">Timed interception: cross a platform edge to meet a falling jar.</span>
@@ -241,7 +235,7 @@
         </figure>
 
         <figure class="level-card">
-          <div class="level-media" aria-label="tipping_point animation placeholder">→ assets/levels/tipping_point.gif</div>
+          <img src="assets/tipping_point_42_solution.gif" alt="tipping_point level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">tipping_point <span class="tier-tag">Tier 1</span></span>
             <span class="level-desc">Unstable equilibrium &mdash; nudge a balanced structure the right way.</span>
@@ -250,7 +244,7 @@
         </figure>
 
         <figure class="level-card">
-          <div class="level-media" aria-label="basket_case animation placeholder">→ assets/levels/basket_case.gif</div>
+          <img src="assets/basket_case_78_solution.gif" alt="basket_case level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">basket_case <span class="tier-tag">Tier 1</span></span>
             <span class="level-desc">Container avoidance: deflect the green ball away from a basket.</span>
@@ -259,7 +253,7 @@
         </figure>
 
         <figure class="level-card">
-          <div class="level-media" aria-label="cliffhanger animation placeholder">→ assets/levels/cliffhanger.gif</div>
+          <img src="assets/cliffhanger_42_solution.gif" alt="cliffhanger level being solved" loading="lazy" />
           <figcaption>
             <span class="level-name">cliffhanger <span class="tier-tag">Tier 1</span></span>
             <span class="level-desc">Ledge/edge dynamics under gravity.</span>
@@ -327,10 +321,7 @@
       </p>
 
       <figure class="inline-fig">
-        <!-- PROVIDE: assets/loop.png (paper Figure 2 / Figure 7 — the actor–evolver–retriever loop) -->
-        <div class="placeholder-figure placeholder-figure--short" aria-label="actor-evolver-retriever loop placeholder">
-          actor → evolver → retriever loop<br><span class="placeholder-sub">→ assets/loop.png  (paper Figure 2)</span>
-        </div>
+        <img src="assets/Feedback_Loop.png" alt="The HeXA actor, skill evolver, and evolving skill bank feedback loop" />
         <figcaption>
           <strong>Figure 2.</strong> The actor&ndash;evolver&ndash;retriever loop (one round). The actor runs each
           episode with the retrieved skill context prepended; trajectories are tagged with rewards. The evolver
