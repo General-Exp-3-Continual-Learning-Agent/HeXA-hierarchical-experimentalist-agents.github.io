@@ -50,6 +50,8 @@ em { font-style: italic; }
 }
 .container--narrow {
   max-width: 760px;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* =================================================================
@@ -346,9 +348,9 @@ em { font-style: italic; }
   font-size: 17px;
   color: var(--text-soft);
   text-align: center !important;
-  margin: 0 auto 28px;
+  margin: 0 auto 28px !important;
   line-height: 1.6;
-  hyphens: none;
+  hyphens: none !important;
 }
 
 .subhead {
