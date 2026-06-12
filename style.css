@@ -345,11 +345,11 @@ em { font-style: italic; }
 .lead {
   font-size: 17px;
   color: var(--text-soft);
-  text-align: center;
+  text-align: center !important;
   margin: 0 auto 28px;
   line-height: 1.6;
+  hyphens: none;
 }
-.lead.container--narrow { text-align: center; }
 
 .subhead {
   font-family: var(--sans);
