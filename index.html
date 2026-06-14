@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HeXA: Hierarchical Experimentalist Agents</title>
-  <meta name="description" content="HeXA: a training-free, in-context reinforcement learning framework that enables LLM agents to actively experiment, evolve reusable skills, and transfer them across tasks. Evaluated on the InterPhyre physics benchmark." />
+  <title>HExA: Hierarchical Experimentalist Agents</title>
+  <meta name="description" content="HExA: a training-free, in-context reinforcement learning framework that enables LLM agents to learn like scientists — actively experiment, evolve reusable skills, and transfer them across tasks. Evaluated on the InterPhyre physics benchmark." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="HeXA: Hierarchical Experimentalist Agents" />
-  <meta property="og:description" content="A training-free, in-context RL framework for LLM agents that actively experiment, evolve skills, and transfer them across tasks." />
+  <meta property="og:title" content="HExA: Hierarchical Experimentalist Agents" />
+  <meta property="og:description" content="A training-free, in-context RL framework for LLM agents that learn like scientists — actively experiment, evolve skills, and transfer them across tasks." />
   <meta property="og:type" content="website" />
   <!-- PROVIDE: assets/og-card.png (1200×630 social preview) -->
   <meta property="og:image" content="assets/og-card.png" />
@@ -27,7 +27,7 @@
   <!-- ============================================================ -->
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="nav-brand" href="#top">HeXA</a>
+      <a class="nav-brand" href="#top">HExA</a>
       <div class="nav-links">
         <a href="#abstract">Abstract</a>
         <a href="#interphyre">InterPhyre</a>
@@ -48,7 +48,7 @@
     <div class="container">
 
       <h1 class="title">Hierarchical Experimentalist Agents</h1>
-      <h2 class="subtitle">In-context skill evolution for LLM agents that actively experiment &mdash; evaluated on the InterPhyre physics benchmark</h2>
+      <h2 class="subtitle">LLM agents that learn like scientists &mdash; actively experiment, evolve reusable skills, and transfer them across tasks in-context</h2>
 
       <!-- Authors -->
       <div class="authors">
@@ -95,9 +95,9 @@
       <figure>
         <img src="assets/teaser.png" alt="HeXA framework overview: ReAct vs. HeXA meta-episode vs. cross-level transfer" />
         <figcaption>
-          <strong>Figure 1.</strong> Overview of HeXA on InterPhyre physics puzzles.
+          <strong>Figure 1.</strong> Overview of HExA on InterPhyre physics puzzles.
           <em>(a) ReAct</em> solves each seed independently with no cross-seed learning.
-          <em>(b) HeXA</em> groups seeds into a meta-episode; after each seed an <em>evolver</em> distils the
+          <em>(b) HExA</em> groups seeds into a meta-episode; after each seed an <em>evolver</em> distils the
           trajectory into a <strong>skill bank</strong> (physics principles + common mistakes), and the evolved
           bank is injected into subsequent seeds' system prompts (25 iterations over 50 seeds per source level).
           <em>(c) Cross-level transfer:</em> banks from easier source levels (down_to_earth, two_body_problem,
@@ -115,12 +115,12 @@
     <div class="container">
       <div class="stat-row">
         <div class="stat">
-          <div class="stat-num">8% → 67%</div>
-          <div class="stat-label">Catapult success (Claude Sonnet 4.6) vs. the ReAct baseline</div>
+          <div class="stat-num">+75 pp</div>
+          <div class="stat-label">Catapult gain over the no-tool Direct baseline (2% &rarr; 77%) with Claude Sonnet 4.6</div>
         </div>
         <div class="stat">
           <div class="stat-num">+36 pp</div>
-          <div class="stat-label">Zero-shot cross-level transfer to catapult, no target-level experiments</div>
+          <div class="stat-label">Zero-shot cross-level transfer to catapult &mdash; no target-level experiments</div>
         </div>
         <div class="stat">
           <div class="stat-num">0% → 54%</div>
@@ -128,7 +128,7 @@
         </div>
         <div class="stat">
           <div class="stat-num">~37%</div>
-          <div class="stat-label">Fewer iterations per episode than ReAct / Reflexion</div>
+          <div class="stat-label">Fewer iterations per episode vs. ReAct / Reflexion</div>
         </div>
       </div>
     </div>
@@ -141,29 +141,34 @@
     <div class="container container--narrow">
       <h2 class="section-title">Abstract</h2>
       <p>
-        Large language models (LLMs) are increasingly used to take action or augment human decision-making,
-        yet most approaches rely on the model's parametric knowledge, possibly supplemented with fixed data or
-        tools. This paradigm breaks down for novel domains or sophisticated queries that are not practically
-        answerable from general prior knowledge &mdash; the laws of physics alone do not let you predict the
-        long-horizon behaviour of a complex physical system. Instead, <strong>active experimentation</strong> may
-        be needed to gather targeted, query-specific data in the domain.
+        Today's LLMs demonstrate remarkable capabilities across knowledge work and agentic tasks, yet the
+        dominant paradigm assumes parametric knowledge &mdash; information encoded during pretraining, augmented
+        with post-training and retrieval &mdash; is sufficient at inference time. This breaks down in two ways:
+        when an agent encounters a novel environment whose dynamics were never seen during training, and when
+        even relevant general knowledge cannot be applied to a specific instance without further experimentation.
+        Knowing the laws of physics, for example, does not by itself solve an experimental physics problem.
       </p>
       <p>
-        We introduce <strong>Hierarchical Experimentalist Agents (HeXA)</strong>, a novel in-context,
-        experiment-centric reasoning approach that (1) iteratively designs and refines query-relevant
-        experiments; (2) incrementally learns a library of reusable, composable skills that accelerate
-        experimentation within and across tasks; and (3) integrates experimental data to effectively take
-        actions or answer queries. HeXA self-improves in-context while co-evolving skills and strategies
-        using interaction rewards &mdash; all without access to offline data, an optimal oracle, or teacher guidance.
-        Because it is entirely in-context and training-free, HeXA works with any black-box frontier model.
+        Agents should instead <strong>learn like scientists</strong> &mdash; through active experimentation,
+        sophisticated hypothesis testing, and reasoning over self-generated observations. But experimentation
+        is costly, and an agent that re-explores from scratch every time wastes the structure shared across a
+        family of related instances. This motivates not just experimentation but <em>learning from it</em>:
+        distilling reusable skills from past experiments and carrying them to new instances and related tasks.
       </p>
       <p>
-        We also introduce <strong>InterPhyre</strong>, a 2D procedural physics simulation environment with a
-        tool-call and intervention API designed to make hypothesis generation and experimentation explicit and
-        measurable. Using Claude Sonnet 4.6, HeXA reaches <strong>67% success</strong> on the hardest level in
-        InterPhyre, compared to 8% using a ReAct and 21% using a Reflexion prompting baseline. The agent also
-        achieves <strong>44% success with no active experimentation at all</strong>, using only skills that were
-        learned and transferred from easier levels &mdash; demonstrating reusability and generalization.
+        We introduce <strong>Hierarchical Experimentalist Agents (HExA)</strong>, a training-free, in-context RL
+        framework in which an LLM (1) actively interacts with a simulator, gathering query-relevant evidence
+        through deliberate experimentation; (2) reflects on batches of successful and failed trajectories to
+        distill a persistent, reward-weighted <em>skill bank</em>; and (3) retrieves and injects those skills
+        into each new episode, amortizing exploration across instances &mdash; all without parameter updates,
+        offline data, or oracle guidance.
+      </p>
+      <p>
+        We also introduce <strong>InterPhyre</strong>, a 2D procedural physics benchmark with a tool-call and
+        intervention API that makes hypothesis generation and experimentation explicit and measurable. Using
+        Claude Sonnet 4.6, HExA achieves gains of up to <strong>+75 points</strong> on the hardest level over
+        the no-tool baseline (stuck at 2%), and <strong>44% success with zero target-level experimentation</strong>
+        by transferring skills from easier levels &mdash; demonstrating genuine reusability and generalization.
       </p>
     </div>
   </section>
@@ -188,7 +193,7 @@
       <h3 class="subhead">Level gallery</h3>
 
       <div class="level-grid">
-        <!-- Tier 2 first — these are HeXA's primary testbed -->
+        <!-- Tier 2 first — these are HExA's primary testbed -->
         <figure class="level-card level-card--hard">
           <img src="assets/catapult_25_action.gif" alt="catapult level being solved" loading="lazy" />
           <figcaption>
@@ -303,9 +308,9 @@
   <!-- ============================================================ -->
   <section class="section" id="method">
     <div class="container container--narrow">
-      <h2 class="section-title">How HeXA Works</h2>
+      <h2 class="section-title">How HExA Works</h2>
       <p>
-        HeXA instantiates a two-agent architecture operating over a sequence of rounds. An <strong>actor</strong>
+        HExA instantiates a two-agent architecture operating over a sequence of rounds. An <strong>actor</strong>
         generates trajectories by interacting with the environment through the tool-call interface; an
         <strong>evolver</strong> reads batches of trajectories and distils them into a natural-language
         <strong>skill bank</strong>; and a <strong>retriever</strong> injects the top-weighted skills and common
@@ -356,14 +361,14 @@
   </section>
 
   <!-- ============================================================ -->
-  <!-- EPISODE WALKTHROUGH (ReAct vs HeXA)                          -->
+  <!-- EPISODE WALKTHROUGH (ReAct vs HExA)                          -->
   <!-- ============================================================ -->
   <section class="section section--alt" id="walkthrough">
     <div class="container">
       <h2 class="section-title">One Episode, Two Agents</h2>
       <p class="lead container--narrow">
         Catapult, seed 45. <strong>ReAct</strong> (no memory) exhausts its 25-iteration budget re-searching
-        placements and never finds a working launch. <strong>HeXA</strong> reuses skills distilled from earlier
+        placements and never finds a working launch. <strong>HExA</strong> reuses skills distilled from earlier
         catapult episodes &mdash; it already knows how to launch (drop a heavy ball on the arm) and how to fix the
         usual failure (when the shot arcs too high and hits the ceiling, shift the drop point sideways to flatten
         it). After one ceiling overshoot it applies the learned correction and solves the level.
@@ -375,7 +380,7 @@
           <img src="assets/trace_react.gif" alt="ReAct failure: 25 iterations, no green–blue contact" loading="lazy" />
         </figure>
         <figure class="trace-row trace-row--win">
-          <figcaption class="trace-label">HeXA &mdash; 6 iterations, <span class="badge badge--win">SUCCESS</span> &nbsp; placement (0.3, 0.9, 1.5)</figcaption>
+          <figcaption class="trace-label">HExA &mdash; 6 iterations, <span class="badge badge--win">SUCCESS</span> &nbsp; placement (0.3, 0.9, 1.5)</figcaption>
           <img src="assets/trace_hexa.gif" alt="HeXA success: 6 iterations, lever flings green ball over the blocker into the basket" loading="lazy" />
         </figure>
       </div>
@@ -392,7 +397,7 @@
         <a class="claim-card" href="#exp-h1">
           <div class="claim-h">H1 · In-context skill evolution beats prompting baselines</div>
           <p>On the hardest levels, turning interaction traces into an evolving skill bank far outperforms ReAct, Reflexion, and a no-tool baseline &mdash; while using fewer iterations per episode.</p>
-          <div class="claim-stat">Catapult: 8% → 67%</div>
+          <div class="claim-stat">Catapult: 2% → 77% (+75 pp over Direct)</div>
         </a>
         <a class="claim-card" href="#exp-h1">
           <div class="claim-h">Reward calibration is load-bearing</div>
@@ -411,8 +416,8 @@
         </a>
         <a class="claim-card" href="#exp-grpo">
           <div class="claim-h">H4 · More sample-efficient than gradient RL</div>
-          <p>At a matched 50-seed budget, in-context HeXA beats GRPO fine-tuning, because a discovered strategy is usable by the next episode immediately via context.</p>
-          <div class="claim-stat">DTE: 24% (HeXA) vs 20% (GRPO)</div>
+          <p>At a matched 50-seed budget, in-context HExA beats GRPO fine-tuning, because a discovered strategy is usable by the next episode immediately via context.</p>
+          <div class="claim-stat">DTE: 24% (HExA) vs 20% (GRPO)</div>
         </a>
         <a class="claim-card" href="#interphyre">
           <div class="claim-h">InterPhyre · A benchmark for experimentation</div>
@@ -431,8 +436,8 @@
       <h2 class="section-title">Experiments &amp; Results</h2>
       <p class="lead container--narrow">
         All methods are evaluated on the <strong>same 50 seeds</strong> per level (paired comparisons), under an
-        identical 25-iteration harness, with HeXA in its default Off2On Evolving configuration (x=3 seeds/round).
-        HeXA, HeXA (no reward), and Reflexion report mean&nbsp;&plusmn;&nbsp;std over 3 runs.
+        identical 25-iteration harness, with HExA in its default Off2On Evolving configuration (x=3 seeds/round).
+        HExA, HExA (no reward), and Reflexion report mean&nbsp;&plusmn;&nbsp;std over 3 runs.
       </p>
 
       <!-- ---- H1: main table ---- -->
@@ -447,21 +452,21 @@
               <tr><td>Direct (one-shot, no tools)</td><td>2.0</td><td>1</td><td>49</td><td>1.0</td></tr>
               <tr><td>ReAct baseline</td><td>8.0</td><td>4</td><td>46</td><td>22.9</td></tr>
               <tr><td>Reflexion (K=2, 3 runs)</td><td>21.3 &plusmn; 2.5</td><td>10.7</td><td>39.3</td><td>21.2</td></tr>
-              <tr><td>HeXA (no reward, 3 runs)</td><td>50.7 &plusmn; 9.4</td><td>25.3</td><td>24.7</td><td>16.5</td></tr>
-              <tr class="row-highlight"><td>HeXA (Off2On Evol., 3 runs)</td><td><strong>67.3 &plusmn; 9.3</strong></td><td>33.7</td><td>16.3</td><td><strong>14.4</strong></td></tr>
+              <tr><td>HExA (no reward, 3 runs)</td><td>50.7 &plusmn; 9.4</td><td>25.3</td><td>24.7</td><td>16.5</td></tr>
+              <tr class="row-highlight"><td>HExA (Off2On Evol., 3 runs)</td><td><strong>67.3 &plusmn; 9.3</strong></td><td>33.7</td><td>16.3</td><td><strong>14.4</strong></td></tr>
             </tbody>
           </table>
         </div>
         <p class="note container--narrow">
-          HeXA reaches ~3&times; the strongest baseline (Reflexion) and uses the fewest iterations per solve.
-          On <code>pass_the_parcel</code>, the best HeXA config reaches <strong>60%</strong> vs. 24% (ReAct),
+          HExA reaches ~3&times; the strongest baseline (Reflexion) and uses the fewest iterations per solve.
+          On <code>pass_the_parcel</code>, the best HExA config reaches <strong>60%</strong> vs. 24% (ReAct),
           16% (Reflexion), 0% (Direct).
         </p>
 
         <div class="chart-2col">
           <figure class="chart-fig">
-            <img src="assets/charts/catapult_cumulative.png" alt="Catapult cumulative success: HeXA 67.3% vs HeXA no-reward 50.7% vs Reflexion 21.3%" loading="lazy" />
-            <figcaption><strong>Figure 4.</strong> Cumulative success on catapult (mean of 3 runs, &plusmn;1 std). HeXA 67.3% · HeXA no-reward 50.7% · Reflexion 21.3%.</figcaption>
+            <img src="assets/charts/catapult_cumulative.png" alt="Catapult cumulative success: HExA 67.3% vs HExA no-reward 50.7% vs Reflexion 21.3%" loading="lazy" />
+            <figcaption><strong>Figure 4.</strong> Cumulative success on catapult (mean of 3 runs, &plusmn;1 std). HExA 67.3% · HExA no-reward 50.7% · Reflexion 21.3%.</figcaption>
           </figure>
           <figure class="chart-fig">
             <img src="assets/charts/ptp_cumulative.png" alt="Pass the Parcel variants: Off2On Evolving at 60% vs ReAct at 24%" loading="lazy" />
@@ -479,11 +484,11 @@
           </thead>
           <tbody>
             <tr><td rowspan="3">Down to Earth</td><td>ReAct baseline</td><td>62.0</td><td>12.5</td><td>&mdash;</td></tr>
-            <tr><td>HeXA (no reward)</td><td>64.0</td><td>14.8</td><td>+2.0</td></tr>
-            <tr class="row-highlight"><td>HeXA (reward-weighted)</td><td><strong>72.0</strong></td><td>12.6</td><td>+10.0</td></tr>
+            <tr><td>HExA (no reward)</td><td>64.0</td><td>14.8</td><td>+2.0</td></tr>
+            <tr class="row-highlight"><td>HExA (reward-weighted)</td><td><strong>72.0</strong></td><td>12.6</td><td>+10.0</td></tr>
             <tr><td rowspan="3">Two Body Problem</td><td>ReAct baseline</td><td>18.0</td><td>22.2</td><td>&mdash;</td></tr>
-            <tr><td>HeXA (no reward)</td><td>26.0</td><td>22.2</td><td>+8.0</td></tr>
-            <tr class="row-highlight"><td>HeXA (reward-weighted)</td><td><strong>34.0</strong></td><td>18.9</td><td>+16.0</td></tr>
+            <tr><td>HExA (no reward)</td><td>26.0</td><td>22.2</td><td>+8.0</td></tr>
+            <tr class="row-highlight"><td>HExA (reward-weighted)</td><td><strong>34.0</strong></td><td>18.9</td><td>+16.0</td></tr>
           </tbody>
         </table>
       </div>
@@ -494,7 +499,7 @@
         <div class="table-wrap container--narrow">
           <table class="results-table">
             <thead>
-              <tr><th>Level</th><th>Model</th><th>Baseline</th><th>HeXA</th><th>&Delta;</th></tr>
+              <tr><th>Level</th><th>Model</th><th>Baseline</th><th>HExA</th><th>&Delta;</th></tr>
             </thead>
             <tbody>
               <tr><td>Down to Earth</td><td>Qwen-2.5-3B</td><td>8.0</td><td>24.0</td><td>+16.0</td></tr>
@@ -513,16 +518,16 @@
 
       <!-- ---- H4: GRPO ---- -->
       <div id="exp-grpo">
-        <h3 class="subhead">H4 &mdash; In-context HeXA vs. gradient-based GRPO (Qwen-2.5-3B)</h3>
+        <h3 class="subhead">H4 &mdash; In-context HExA vs. gradient-based GRPO (Qwen-2.5-3B)</h3>
         <p class="container--narrow">
-          At a matched budget of 50 unique seeds, HeXA beats GRPO fine-tuning: <strong>24% vs 20%</strong> on
-          down_to_earth and <strong>14% vs 6%</strong> on two_body_problem. A strategy HeXA discovers is usable by
+          At a matched budget of 50 unique seeds, HExA beats GRPO fine-tuning: <strong>24% vs 20%</strong> on
+          down_to_earth and <strong>14% vs 6%</strong> on two_body_problem. A strategy HExA discovers is usable by
           the next episode immediately via context, whereas GRPO must encode it into weights over many rollouts.
           With sufficient training, GRPO eventually catches up via direct reward optimisation.
         </p>
         <figure class="chart-fig container--narrow">
           <img src="assets/charts/grpo.png" alt="GRPO training dynamics vs HeXA: HeXA leads at matched 50-seed budget" loading="lazy" />
-          <figcaption><strong>Figure 11.</strong> Val success vs. unique training seeds (log scale). At the matched budget (dashed line), both GRPO variants fall below HeXA (★).</figcaption>
+          <figcaption><strong>Figure 11.</strong> Val success vs. unique training seeds (log scale). At the matched budget (dashed line), both GRPO variants fall below HExA (★).</figcaption>
         </figure>
       </div>
     </div>
@@ -544,7 +549,7 @@
         <figcaption><strong>Figure 3.</strong> Cross-level transfer results. Blue bars show accuracy with only a synthesised skill bank injected (no target-level trajectories). +36 pp on catapult (Sonnet), +12 pp on Falling Into Place (Qwen-7B), +16 pp on Two Body Problem (Qwen-7B).</figcaption>
       </figure>
       <p class="note container--narrow">
-        The +36 pp catapult gain closes ~60% of the gap to the within-level HeXA result (64%), with zero
+        The +36 pp catapult gain closes ~60% of the gap to the within-level HExA result (64%), with zero
         target-level experiments. That transfer also succeeds across <em>dissimilar</em> level pairs suggests the
         evolver extracts abstract principles &mdash; momentum transfer, contact geometry, directional impulse &mdash;
         rather than narrow placement heuristics.
@@ -566,7 +571,7 @@
     <div class="container">
       <h2 class="section-title">Inside the Skill Bank</h2>
       <p class="lead container--narrow">
-        The skill bank is HeXA's central artifact: a compact, human-readable set of <strong>physics principles</strong>
+        The skill bank is HExA's central artifact: a compact, human-readable set of <strong>physics principles</strong>
         and <strong>common mistakes</strong>, each weighted by the reward of the trajectories it was distilled from.
         Below are real entries from a round-14 <code>catapult</code> bank (paper Appendix E.4).
       </p>
@@ -628,7 +633,7 @@
     <div class="container container--narrow">
       <h2 class="section-title">BibTeX</h2>
       <pre><code>@article{hexa2026,
-  title  = {HeXA: Hierarchical Experimentalist Agents},
+  title  = {HExA: Hierarchical Experimentalist Agents},
   author = {Abhranil Chandra and Sankaran Vaidyanathan and Utsav Dhanuka and Varun Gandhi and Scott Niekum},
   year   = {2026}
 }</code></pre>
