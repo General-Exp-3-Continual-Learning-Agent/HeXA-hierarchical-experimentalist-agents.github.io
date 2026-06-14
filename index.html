@@ -141,34 +141,41 @@
     <div class="container container--narrow">
       <h2 class="section-title">Abstract</h2>
       <p>
-        Today's LLMs demonstrate remarkable capabilities across knowledge work and agentic tasks, yet the
-        dominant paradigm assumes parametric knowledge &mdash; information encoded during pretraining, augmented
-        with post-training and retrieval &mdash; is sufficient at inference time. This breaks down in two ways:
-        when an agent encounters a novel environment whose dynamics were never seen during training, and when
-        even relevant general knowledge cannot be applied to a specific instance without further experimentation.
-        Knowing the laws of physics, for example, does not by itself solve an experimental physics problem.
+        Large language models (LLMs) are increasingly used to take action or augment human decision-making,
+        yet most systems rely on parametric knowledge acquired by imitation, optionally supplemented with fixed
+        data, retrieval, or search. However, this paradigm breaks down in novel domains and on sophisticated
+        queries that cannot be answered from prior knowledge alone: knowing the laws of physics, for instance,
+        does not by itself enable LLMs to answer queries about or complete long-horizon tasks in a complex
+        physical system without explicit interactions in a physics simulator. Thus to solve such novel problems
+        generally, agents should have the fundamental ability of <em>active experimentation</em>&mdash;to
+        explore and gather targeted query-specific data or general principles about the unseen environments
+        and to acquire new reusable skills by learning from these diverse interactions and experiences.
       </p>
       <p>
-        Agents should instead <strong>learn like scientists</strong> &mdash; through active experimentation,
-        sophisticated hypothesis testing, and reasoning over self-generated observations. But experimentation
-        is costly, and an agent that re-explores from scratch every time wastes the structure shared across a
-        family of related instances. This motivates not just experimentation but <em>learning from it</em>:
-        distilling reusable skills from past experiments and carrying them to new instances and related tasks.
+        We thus introduce <strong>Hierarchical Experimentalist Agents (HExA)</strong>, a novel in-context,
+        experiment-centric self-improvement framework that (1) iteratively designs and refines query-relevant
+        experiments; (2) incrementally learns from experiences a library of reusable and composable skills that
+        accelerate experimentation within and across tasks; and (3) integrates the experimental data to
+        effectively take actions or answer queries. Being entirely in-context and training-free, HExA can be
+        used with any models, including black-box frontier models&mdash;enabling them to self-improve while
+        co-evolving the skills using progress and efficiency rewards, interaction feedback from correct,
+        incorrect, and partial rollouts, and experimental interventions, all without any reliance on offline
+        data, oracle supervision, or external teacher guidance.
       </p>
       <p>
-        We introduce <strong>Hierarchical Experimentalist Agents (HExA)</strong>, a training-free, in-context RL
-        framework in which an LLM (1) actively interacts with a simulator, gathering query-relevant evidence
-        through deliberate experimentation; (2) reflects on batches of successful and failed trajectories to
-        distill a persistent, reward-weighted <em>skill bank</em>; and (3) retrieves and injects those skills
-        into each new episode, amortizing exploration across instances &mdash; all without parameter updates,
-        offline data, or oracle guidance.
-      </p>
-      <p>
-        We also introduce <strong>InterPhyre</strong>, a 2D procedural physics benchmark with a tool-call and
-        intervention API that makes hypothesis generation and experimentation explicit and measurable. Using
-        Claude Sonnet 4.6, HExA achieves gains of up to <strong>+75 points</strong> on the hardest level over
-        the no-tool baseline (stuck at 2%), and <strong>44% success with zero target-level experimentation</strong>
-        by transferring skills from easier levels &mdash; demonstrating genuine reusability and generalization.
+        We also introduce <strong>InterPhyre</strong>, a 2D procedural physics simulation and embodied
+        reasoning environment with additional tool-call and intervention APIs to enable agents to propose
+        experiments and test hypotheses&mdash;designed to better evaluate and measure the ability of agents to
+        learn from experimentation. On the hardest levels of InterPhyre, frontier models like Claude Sonnet 4.6
+        only achieve 2% success rate while HExA using experimentation-centric learning improves the same model
+        to a maximum success rate of <strong>77%</strong>. We also show similar improvements across all
+        experiments with smaller open-weight models and over other agentic baselines like ReAct and Reflexion.
+        The agent also achieves <strong>44% success</strong> by not doing any active experimentation and using
+        only skills that were learned and transferred from easier levels, demonstrating reusability and
+        generalization. Our experiments show that current LLM agents still struggle in these settings, leaving
+        a large room for improvement. HExA is a step toward scalable learning mechanisms that let agents learn
+        through active experimentation and interaction while acquiring evolving skills, which remains a core
+        challenge for building generalist agents.
       </p>
     </div>
   </section>
