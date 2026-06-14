@@ -653,58 +653,314 @@
     <div class="container">
       <h2 class="section-title">Inside the Skill Bank</h2>
       <p class="lead container--narrow">
-        The skill bank is HExA's central artifact: a compact, human-readable set of <strong>physics principles</strong>
-        and <strong>common mistakes</strong>, each weighted by the reward of the trajectories it was distilled from.
-        Below are real entries from a round-14 <code>catapult</code> bank (paper Appendix E.4).
+        After each round of experimentation, HExA's evolver distils interaction trajectories into a growing
+        library of <strong>physics principles</strong> and <strong>anti-patterns</strong>. Each skill carries a
+        confidence score computed from the rewards of the trajectories it was extracted from &mdash; higher-confidence
+        skills appear at the top of every agent's context. Below are real entries from evolved banks across three
+        InterPhyre levels.
       </p>
 
-      <div class="container--narrow">
-        <div class="skill-col-label skill-col-label--skill">Skills (physics principles)</div>
+      <div class="skill-tabs">
+        <input type="radio" name="skill-tab" id="tab-cat" class="tab-radio" checked>
+        <input type="radio" name="skill-tab" id="tab-dte" class="tab-radio">
+        <input type="radio" name="skill-tab" id="tab-ptp" class="tab-radio">
 
-        <details class="skill" open>
-          <summary>
-            <span class="skill-id">cat_ev_1_001</span>
-            <span class="skill-title">x ≈ 0.5 is the primary catapult launch sweet spot</span>
-            <span class="skill-weight">w = 0.9</span>
-          </summary>
-          <div class="skill-body">
-            <p><strong>Principle.</strong> Placing the red ball at x=0.5 on the catapult arm produces a consistent rightward launch arc; only deviate to x=0.3 when a ceiling hit is observed.</p>
-            <p><strong>Applicability.</strong> Always, as the first placement attempt.</p>
-            <p><strong>Coordinate example.</strong> <code>(0.5, 0.4, 1.5)</code></p>
+        <div class="tab-label-row">
+          <label for="tab-cat" class="tab-label">Catapult</label>
+          <label for="tab-dte" class="tab-label">Down to Earth</label>
+          <label for="tab-ptp" class="tab-label">Pass the Parcel</label>
+        </div>
+
+        <!-- ══ CATAPULT ══════════════════════════════════════════════ -->
+        <div class="tab-panel tab-panel--cat">
+
+          <div class="bank-section-header">
+            <span class="bank-section-title">Skills</span>
+            <span class="bank-section-count">5 principles &middot; generation 10</span>
           </div>
-        </details>
+          <div class="skill-grid">
 
-        <details class="skill">
-          <summary>
-            <span class="skill-id">cat_ev_11_009</span>
-            <span class="skill-title">When the ceiling–range tradeoff is unsolvable by radius tuning, shift x to 0.1–0.3</span>
-            <span class="skill-weight">w = 0.8</span>
-          </summary>
-          <div class="skill-body">
-            <p><strong>Principle.</strong> If adjusting the ball radius cannot simultaneously clear the ceiling-blocker and reach the basket, move the drop point sideways (x → 0.1–0.3) to flatten the launch arc instead of adding force.</p>
-            <p><strong>Note.</strong> This single principle compresses many distinct <code>(x, y, r)</code> tool-call sequences &mdash; an example of hierarchical abstraction.</p>
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">x ≈ 0.5 Is the Primary Launch Sweet Spot</span>
+                <span class="skill-conf-label">0.91</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:91%"></div></div>
+              <p class="skill-principle">Placing the red ball at x=0.5 on the catapult arm produces a consistent rightward launch arc. The contact point sits on the right side of the pivot, creating sufficient lever arm for strong rotation while staying in the geometrically stable zone. Only deviate to x=0.3 when a ceiling hit is observed.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Always as the first placement attempt. Deviate only on ceiling hit or overlap.</span>
+                <span class="skill-field"><strong>Example:</strong> <code>(0.5, 0.4, 1.5)</code> &mdash; canonical primary (Seed 44)</span>
+              </div>
+              <div class="skill-seeds">Seeds: 44</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Use Large Radius (≥1.5) for Sufficient Launch Energy</span>
+                <span class="skill-conf-label">0.90</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:90%"></div></div>
+              <p class="skill-principle">The catapult arm is a lever &mdash; red ball mass (&prop;r&sup3;) determines angular momentum imparted to the arm. Below r&approx;1.2 the arm rotates too slowly to launch the green ball across the &sim;7-unit gap. r=1.5 is the minimum reliable threshold; r=2.0 adds negligible additional range at x=0.5 due to arm rotation saturation.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Always use r=1.5 as baseline. Scale down only when overlap constraints require it.</span>
+                <span class="skill-field"><strong>Example:</strong> <code>(0.5, 0.4, 1.5)</code> &mdash; Seed 44</span>
+              </div>
+              <div class="skill-seeds">Seeds: 44</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Three-Tier Fallback Sequence for Failed Primary</span>
+                <span class="skill-conf-label">0.93</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:93%"></div></div>
+              <p class="skill-principle">When primary (x=0.5, y=0.4, r=1.5) fails: (1) ceiling hit &rarr; try x=0.3, y=0.4, r=1.5; if still hitting, try x=0.3, y=&minus;0.3, r=2.0 but verify no overlap first. (2) short range &rarr; increase y to 0.9 or shift x to 0.4&ndash;0.45. (3) persistent failure after 2+ radius variations at same x &rarr; stop tuning, shift x to 0.2&ndash;0.3.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Immediately when ceiling hit or short range is observed. Do not micro-tune the failed placement.</span>
+                <span class="skill-field"><strong>Example:</strong> Seed 44 primary hit ceiling &rarr; x=0.3, y=0.4, r=1.5 succeeded</span>
+              </div>
+              <div class="skill-seeds">Seeds: 44</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">x=0.3 Is the Ceiling-Escape Position; y=0.4 Is Gray-Ball-Safe</span>
+                <span class="skill-conf-label">0.93</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:93%"></div></div>
+              <p class="skill-principle">Shifting x from 0.5 to 0.3 flattens the launch arc by changing the arm contact point &mdash; this x-shift is the primary ceiling-escape mechanism, not lowering y. When x=0.3, y=&minus;0.3, r=2.0 is invalid due to gray_ball pivot overlap, use x=0.3, y=0.4, r=1.5; y=0.4 avoids the overlap zone while preserving arc-flattening.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Primary (x=0.5) causes ceiling hit. Try x=0.3, y=0.4, r=1.5 before attempting y=&minus;0.3.</span>
+                <span class="skill-field"><strong>Example:</strong> Seed 44: x=0.3, y=0.4, r=1.5 &rarr; green ball bounced off top wall into basket</span>
+              </div>
+              <div class="skill-seeds">Seeds: 44</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Ceiling Blocker Lethality Depends on Its x-Position</span>
+                <span class="skill-conf-label">0.87</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:87%"></div></div>
+              <p class="skill-principle">The static black ball near y&approx;4.6 varies in x-position across seeds (x&approx;&minus;3.85 to &minus;1.14). When the blocker is at x &gt; &minus;2.5, primary placement causes a ceiling hit. When x &lt; &minus;3.5, x=0.3 launches allow the green ball to arc up and bounce off the top wall before descending into the basket.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Check ceiling blocker x via describe_scene_geometry. If x &gt; &minus;2.5, ceiling escape is needed.</span>
+                <span class="skill-field"><strong>Example:</strong> Seed 44: black_ball at x=&minus;3.63 &rarr; green ball bounced off top_wall then landed in basket</span>
+              </div>
+              <div class="skill-seeds">Seeds: 44</div>
+            </div>
+
+          </div><!-- /.skill-grid -->
+
+          <div class="bank-section-header" style="margin-top:32px;">
+            <span class="bank-section-title bank-section-title--mistake">Common Mistakes</span>
+            <span class="bank-section-count">3 anti-patterns &middot; generation 10</span>
           </div>
-        </details>
+          <div class="mistake-grid">
 
-        <div class="skill-col-label skill-col-label--mistake">Common mistakes</div>
+            <div class="mistake-card">
+              <p class="mistake-desc">Micro-tuning x/y/r around the same narrow region without escaping the local solution space.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>The catapult arm is the most obvious mechanism &mdash; after 2&ndash;3 failures, agents try small perturbations instead of qualitatively different placements.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>After 2 failures within x&plusmn;0.2, move to a completely different x zone (x=0.5 &rarr; x=0.3) rather than fine-tuning.</div>
+            </div>
 
-        <details class="skill skill--mistake">
-          <summary>
-            <span class="skill-id">µ</span>
-            <span class="skill-title">Fixating on a single launch mechanism and micro-tuning around one narrow region</span>
-          </summary>
-          <div class="skill-body">
-            <p><strong>Description.</strong> The agent micro-tunes x/y/r around the same narrow region instead of exploring alternatives.</p>
-            <p><strong>Root cause.</strong> The arm is the most obvious mechanism, so failures are met with small perturbations.</p>
-            <p><strong>Corrective.</strong> After 2 failures within x ± 0.2, move to a completely different x zone.</p>
+            <div class="mistake-card">
+              <p class="mistake-desc">Increasing radius at fixed x=0.5 expecting more range, when arm rotation is already saturated.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>Linear energy intuition: more mass = more energy = more range. But lever rotation saturates before additional mass converts to green ball velocity at x=0.5.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>When r=1.5 fails at x=0.5, never try r=2.0. Change x-position to 0.3 instead.</div>
+            </div>
+
+            <div class="mistake-card">
+              <p class="mistake-desc">Adjusting y upward after a ceiling hit &mdash; increasing launch energy, worsening the collision.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>Higher drop = more kinetic energy at impact. But more energy produces a higher-arcing launch, worsening the ceiling hit.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>After a ceiling hit, shift x left to 0.3 (keeping y=0.4) to flatten the arc. Never increase y above 1.5 in response to ceiling hits.</div>
+            </div>
+
           </div>
-        </details>
+        </div><!-- /.tab-panel--cat -->
 
-        <p class="note">
-          PROVIDE: more skill/mistake entries from your evolved banks (any level) to populate this section.
-          Each entry is one <code>&lt;details class="skill"&gt;</code> block &mdash; copy the pattern above.
-        </p>
-      </div>
+        <!-- ══ DOWN TO EARTH ══════════════════════════════════════════ -->
+        <div class="tab-panel tab-panel--dte">
+
+          <div class="bank-section-header">
+            <span class="bank-section-title">Skills</span>
+            <span class="bank-section-count">3 principles &middot; generation 13&ndash;14</span>
+          </div>
+          <div class="skill-grid">
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Optimal Initial Positioning Near the Green Ball</span>
+                <span class="skill-conf-label">0.90</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:90%"></div></div>
+              <p class="skill-principle">Place the red ball near the green ball but not overlapping to ensure a precise collision. Proximity maximises impulse transfer while avoiding invalid placements that waste iterations.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> When placing the red ball for the first time.</span>
+              </div>
+              <div class="skill-seeds">Seeds: 51, 52, 53</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Red Ball Positioning for Strong Directed Impulse</span>
+                <span class="skill-conf-label">0.88</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:88%"></div></div>
+              <p class="skill-principle">Place the red ball closer to the green ball and near the edge of the platform to ensure a strong and directed collision impulse. Proximity to the platform edge increases the lateral component of the impulse, helping the green ball clear the edge rather than bouncing back.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> When the green ball is near the centre of the platform and needs a directed push toward the edge.</span>
+                <span class="skill-field"><strong>Example:</strong> <code>(1.3, 2.5)</code></span>
+              </div>
+              <div class="skill-seeds">Seeds: 52</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Platform Edge Geometry: Maximise Lateral Impulse</span>
+                <span class="skill-conf-label">0.56</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:56%"></div></div>
+              <p class="skill-principle">Ensure the red ball is placed near the edge of the platform to maximise the collision impulse toward the edge. The platform boundary creates a geometry where a well-placed red ball can leverage the edge to redirect the green ball downward rather than laterally.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> When the red ball needs to push the green ball off the platform edge.</span>
+                <span class="skill-field"><strong>Example:</strong> <code>(1.5, 3.5)</code></span>
+              </div>
+              <div class="skill-seeds">Seeds: 52, 53</div>
+            </div>
+
+          </div><!-- /.skill-grid -->
+
+          <div class="bank-section-header" style="margin-top:32px;">
+            <span class="bank-section-title bank-section-title--mistake">Common Mistakes</span>
+            <span class="bank-section-count">2 anti-patterns &middot; generation 13&ndash;14</span>
+          </div>
+          <div class="mistake-grid" style="grid-template-columns: repeat(2,1fr);">
+
+            <div class="mistake-card">
+              <p class="mistake-desc">Repeatedly trying the red ball in the same crowded area around the green ball after each failure.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>Agent lacks confidence in other regions and defaults to the same vicinity, treating failures as positioning errors rather than strategy errors.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>Shift x or y by at least 0.5 units after two consecutive failures from the same region before any further fine-tuning.</div>
+            </div>
+
+            <div class="mistake-card">
+              <p class="mistake-desc">Ignoring the direction and magnitude of the collision impulse when choosing placement.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>Agent focuses on avoiding overlap rather than engineering the right impulse vector &mdash; treating placement as a constraint problem rather than a physics problem.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>Approach from the side opposite the desired green ball exit direction to ensure the impulse is correctly directed.</div>
+            </div>
+
+          </div>
+        </div><!-- /.tab-panel--dte -->
+
+        <!-- ══ PASS THE PARCEL ════════════════════════════════════════ -->
+        <div class="tab-panel tab-panel--ptp">
+
+          <div class="bank-section-header">
+            <span class="bank-section-title">Skills</span>
+            <span class="bank-section-count">5 principles &middot; generation 12</span>
+          </div>
+          <div class="skill-grid">
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Ramp Launch: Upper-Mid Zone Placement</span>
+                <span class="skill-conf-label">0.90</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:90%"></div></div>
+              <p class="skill-principle">Place the red ball on the upper portion of the ramp at x &approx; ramp_center_x &minus; 0.15 to &minus;0.50 and y &approx; 3.8&ndash;4.2. This offset ensures the ball rolls down the ramp with sufficient leftward momentum to strike the top basket. The exact x-offset modulates the angle of impact on the inverted basket.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Always use as the primary strategy; compute x-offset from get_ramp_center.</span>
+                <span class="skill-field"><strong>Example:</strong> ramp_center_x=3.401 &rarr; try x=2.9; ramp_center_x=3.774 &rarr; try x=3.3</span>
+              </div>
+              <div class="skill-seeds">Seeds: 51, 53</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Safe Radius Range: r = 0.45&ndash;0.52</span>
+                <span class="skill-conf-label">0.88</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:88%"></div></div>
+              <p class="skill-principle">Radii below 0.40 often produce insufficient impulse to dislodge the top basket. Radii above 0.52 frequently overshoot the green ball far left (x &lt; &minus;3.0), missing the bottom basket entirely. The r=0.45&ndash;0.52 range provides the best impulse-accuracy tradeoff.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Default to r=0.45 or r=0.5 on first attempt; do not exceed r=0.55 without overshoot analysis.</span>
+                <span class="skill-field"><strong>Example:</strong> Seed 52: r=0.6 &rarr; rim stall, r=0.7 &rarr; overshoot to x=&minus;4.73; r=0.5 is safer.</span>
+              </div>
+              <div class="skill-seeds">Seeds: 51, 52, 53</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">y = 4.2 Is the Preferred Default Launch Height</span>
+                <span class="skill-conf-label">0.87</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:87%"></div></div>
+              <p class="skill-principle">Setting y=4.2 provides reliable impulse for both r=0.45 and r=0.5. Trajectories at y=4.0 frequently leave the green ball energy-deficient, stalling above the bottom basket. y=4.2 consistently cleared this gap in successful runs; y=4.3 is the fallback for persistent energy deficit.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Use y=4.2 as the first-attempt height; verify y + r &le; 4.95 to avoid ceiling clamp. Escalate to y=4.3 only if green ball still stalls.</span>
+                <span class="skill-field"><strong>Example:</strong> Seed 51: x=2.9, y=4.2, r=0.45 &rarr; SUCCESS after y=4.0 failed</span>
+              </div>
+              <div class="skill-seeds">Seeds: 51, 53</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Basket-Fall Coupling: Velocity-Match Signals Re-Trapping</span>
+                <span class="skill-conf-label">0.87</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:87%"></div></div>
+              <p class="skill-principle">When the top basket and green ball share nearly identical velocities during descent (green_y &minus; basket_y &lt; 0.6), the basket is re-trapping the green ball. A large x-shift alone may not break this coupling &mdash; increasing y is often required to give the green ball enough velocity to separate from the basket mid-fall.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> After any simulation where basket_y is within 0.6 of green_ball_y in the final state, increase y by 0.15&ndash;0.20 rather than shifting x.</span>
+                <span class="skill-field"><strong>Example:</strong> Seed 51: x=2.7, y=3.8 &rarr; re-trap; x=2.9, y=4.2 &rarr; separation &rarr; SUCCESS</span>
+              </div>
+              <div class="skill-seeds">Seeds: 51</div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-card-header">
+                <span class="skill-card-title">Overshoot Detection: Physics Has Binary Threshold Behaviour</span>
+                <span class="skill-conf-label">0.90</span>
+              </div>
+              <div class="conf-bar"><div class="conf-fill" style="width:90%"></div></div>
+              <p class="skill-principle">The level exhibits sharp non-monotonic thresholds: small radius changes (&Delta;&approx;0.05&ndash;0.1) can flip the green ball from rim-stall to far-overshoot without passing through a success region. When r=0.5 produces rim stall and r=0.7 produces far overshoot, intermediate radii typically also stall. Switch to adjusting y rather than bisecting r.</p>
+              <div class="skill-foot">
+                <span class="skill-field"><strong>When:</strong> Two radius values produce opposite failure modes (stall vs. overshoot) &mdash; do not bisect. Hold r constant and increase y to add energy instead.</span>
+                <span class="skill-field"><strong>Example:</strong> Seed 52: r=0.5/0.6/0.65 &rarr; rim stall; r=0.7 &rarr; far overshoot. Bisecting r was futile.</span>
+              </div>
+              <div class="skill-seeds">Seeds: 52</div>
+            </div>
+
+          </div><!-- /.skill-grid -->
+
+          <div class="bank-section-header" style="margin-top:32px;">
+            <span class="bank-section-title bank-section-title--mistake">Common Mistakes</span>
+            <span class="bank-section-count">3 anti-patterns &middot; generation 12</span>
+          </div>
+          <div class="mistake-grid">
+
+            <div class="mistake-card">
+              <p class="mistake-desc">Fine-grained bisection of radius or y in chaotic threshold regions where physics is non-monotonic.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>Agent treats the parameter space as smooth and continuous, assuming bisection will converge. Threshold regions have discontinuous jumps.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>Bisect at most once between opposite failure modes, then switch to a completely different parameter axis (e.g., from r to y).</div>
+            </div>
+
+            <div class="mistake-card">
+              <p class="mistake-desc">Failing to prevent the top basket from tracking alongside the green ball and re-trapping it mid-fall.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>Agent adjusts x when basket re-trapping occurs, not recognising that more vertical energy (higher y) is needed to break velocity coupling.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>When final basket_y is within 0.6 of green_ball_y, increase y by 0.15&ndash;0.20 rather than shifting x alone.</div>
+            </div>
+
+            <div class="mistake-card">
+              <p class="mistake-desc">Ignoring the 2000-step budget &mdash; green ball has the right direction but insufficient speed to reach the target.</p>
+              <div class="mistake-field"><span class="mistake-label">Why it happens</span>Agent interprets near-miss positions (green above blue) as close to success, when the green ball has actually stopped with steps exhausted.</div>
+              <div class="mistake-field"><span class="mistake-label">How to avoid</span>Check final velocities &mdash; if green_ball velocity &approx; 0 at step 2000 with green still above blue, this is an energy-deficit failure requiring a y or r increase.</div>
+            </div>
+
+          </div>
+        </div><!-- /.tab-panel--ptp -->
+
+      </div><!-- /.skill-tabs -->
     </div>
   </section>
 
