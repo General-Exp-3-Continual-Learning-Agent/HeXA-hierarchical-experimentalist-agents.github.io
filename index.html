@@ -547,26 +547,101 @@
     <div class="container">
       <h2 class="section-title">Zero-Shot Cross-Level Transfer</h2>
       <p class="lead container--narrow">
-        Are the distilled skills genuine physics primitives or level-specific recipes? We synthesise a skill bank
-        for an unseen target level from <em>only</em> source-level banks plus a textual description &mdash;
-        <strong>no target-level trajectories at any stage</strong> &mdash; then inject it with no further evolution.
+        Do distilled skills encode <em>genuine physics primitives</em> or just level-specific recipes?
+        We test this by synthesising a skill bank for a target level using only source-level banks and a
+        one-sentence level description &mdash; <strong>no target-level trajectories at any stage</strong>.
       </p>
-      <figure class="chart-fig container--narrow">
-        <img src="assets/charts/cross_level_transfer.png" alt="Cross-level skill transfer: target success rate vs ReAct baseline across catapult, falling into place, and two body problem" loading="lazy" />
-        <figcaption><strong>Figure 3.</strong> Cross-level transfer results. Blue bars show accuracy with only a synthesised skill bank injected (no target-level trajectories). +36 pp on catapult (Sonnet), +12 pp on Falling Into Place (Qwen-7B), +16 pp on Two Body Problem (Qwen-7B).</figcaption>
-      </figure>
-      <p class="note container--narrow">
-        The +36 pp catapult gain closes ~60% of the gap to the within-level HExA result (64%), with zero
-        target-level experiments. That transfer also succeeds across <em>dissimilar</em> level pairs suggests the
-        evolver extracts abstract principles &mdash; momentum transfer, contact geometry, directional impulse &mdash;
-        rather than narrow placement heuristics.
-      </p>
-      <figure class="inline-fig">
-        <!-- PROVIDE: assets/transfer.png  (a diagram of source banks → synthesised target bank, paper Figure 1c) -->
-        <div class="placeholder-figure placeholder-figure--short" aria-label="transfer diagram placeholder">
-          source banks → synthesised cross-level bank → catapult<br><span class="placeholder-sub">→ assets/transfer.png  (paper Fig. 1c)</span>
+
+      <!-- Setup cards -->
+      <div class="transfer-setup container--narrow">
+        <div class="transfer-card">
+          <div class="transfer-card-label">Multi-source &nbsp;·&nbsp; Claude Sonnet</div>
+          <div class="transfer-sources">
+            <span class="transfer-source">Down to Earth <span class="src-count">8 skills</span></span>
+            <span class="transfer-source">Two Body Problem <span class="src-count">8 skills</span></span>
+            <span class="transfer-source">Pass the Parcel <span class="src-count">10 skills</span></span>
+          </div>
+          <div class="transfer-arrow">↓ evolver synthesises</div>
+          <div class="transfer-target">
+            <strong>Catapult</strong>
+            <span class="transfer-bank">9 skills · 4 mistakes</span>
+            <span class="transfer-result">44% <span class="transfer-delta">+36 pp</span></span>
+          </div>
         </div>
-        <figcaption><strong>Figure 6.</strong> Three source banks are synthesised by the evolver into one cross-level bank for catapult.</figcaption>
+        <div class="transfer-card">
+          <div class="transfer-card-label">Single-source &nbsp;·&nbsp; Qwen-2.5-7B</div>
+          <div class="transfer-sources">
+            <span class="transfer-source">Down to Earth <span class="src-count">8 skills</span></span>
+          </div>
+          <div class="transfer-arrow">↓ evolver synthesises</div>
+          <div class="transfer-targets-row">
+            <div class="transfer-target">
+              <strong>Falling Into Place</strong>
+              <span class="transfer-bank">4 skills · 2 mistakes</span>
+              <span class="transfer-result">32% <span class="transfer-delta">+12 pp</span></span>
+            </div>
+            <div class="transfer-target">
+              <strong>Two Body Problem</strong>
+              <span class="transfer-bank">3 skills · 1 mistake</span>
+              <span class="transfer-result">34% <span class="transfer-delta">+16 pp</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results table -->
+      <div class="table-wrap container--narrow" style="margin-top:28px;">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Target Level</th>
+              <th>Sources</th>
+              <th>Model</th>
+              <th>ReAct</th>
+              <th>Transfer</th>
+              <th>Δ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-highlight">
+              <td><strong>Catapult</strong></td>
+              <td>DTE + TBP + PTP</td>
+              <td>Sonnet</td>
+              <td>8.0%</td>
+              <td><strong>44.0%</strong></td>
+              <td><span class="badge badge--win">+36 pp</span></td>
+            </tr>
+            <tr>
+              <td>Falling Into Place</td>
+              <td>DTE only</td>
+              <td>Qwen-7B</td>
+              <td>20.0%</td>
+              <td><strong>32.0%</strong></td>
+              <td><span class="badge badge--win">+12 pp</span></td>
+            </tr>
+            <tr>
+              <td>Two Body Problem</td>
+              <td>DTE only</td>
+              <td>Qwen-7B</td>
+              <td>18.0%</td>
+              <td><strong>34.0%</strong></td>
+              <td><span class="badge badge--win">+16 pp</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="table-note">Transfer is positive in every case. No target-level trajectories are seen at any stage.</p>
+      </div>
+
+      <!-- Bar chart -->
+      <figure class="chart-fig container--narrow" style="margin-top:32px;">
+        <img src="assets/charts/cross_level_transfer.png" alt="Cross-level skill transfer bar chart: HExA transfer vs ReAct baseline for catapult, falling into place, and two body problem" loading="lazy" />
+        <figcaption>
+          <strong>Figure 6.</strong> Success rate with only the synthesised skill bank injected vs. the ReAct baseline.
+          Multi-source catapult transfer (+36 pp) closes ~60% of the gap to the within-level HExA result of 64%.
+          Positive transfer even on structurally dissimilar pairs (DTE&rarr;Two Body Problem) indicates the evolver
+          extracts abstract principles &mdash; momentum transfer, contact geometry, directional impulse &mdash;
+          rather than narrow placement heuristics.
+        </figcaption>
       </figure>
     </div>
   </section>
