@@ -539,18 +539,10 @@
         for an unseen target level from <em>only</em> source-level banks plus a textual description &mdash;
         <strong>no target-level trajectories at any stage</strong> &mdash; then inject it with no further evolution.
       </p>
-      <div class="table-wrap container--narrow">
-        <table class="results-table">
-          <thead>
-            <tr><th>Target</th><th>Source banks</th><th>Solver</th><th>Acc. (%)</th><th>Baseline</th><th>&Delta;</th></tr>
-          </thead>
-          <tbody>
-            <tr class="row-highlight"><td>Catapult</td><td>DTE, TBP, PTP</td><td>Sonnet</td><td><strong>44.0</strong></td><td>8.0</td><td>+36.0</td></tr>
-            <tr><td>Falling Into Place</td><td>DTE</td><td>Qwen-7B</td><td>32.0</td><td>20.0</td><td>+12.0</td></tr>
-            <tr><td>Two Body Problem</td><td>DTE</td><td>Qwen-7B</td><td>34.0</td><td>18.0</td><td>+16.0</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <figure class="chart-fig container--narrow">
+        <img src="assets/charts/cross_level_transfer.png" alt="Cross-level skill transfer: target success rate vs ReAct baseline across catapult, falling into place, and two body problem" loading="lazy" />
+        <figcaption><strong>Figure 3.</strong> Cross-level transfer results. Blue bars show accuracy with only a synthesised skill bank injected (no target-level trajectories). +36 pp on catapult (Sonnet), +12 pp on Falling Into Place (Qwen-7B), +16 pp on Two Body Problem (Qwen-7B).</figcaption>
+      </figure>
       <p class="note container--narrow">
         The +36 pp catapult gain closes ~60% of the gap to the within-level HeXA result (64%), with zero
         target-level experiments. That transfer also succeeds across <em>dissimilar</em> level pairs suggests the
